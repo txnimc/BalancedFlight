@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "JZJ",
+    "FVF",
+    "JJJ"
+  ],
+  "key": {
+    "J": {
+      "item": "balancedflight:ascended_blackstone"
+    },
+    "F": {
+      "item": "minecraft:diamond_block"
+    },
+    "V": {
+      "item": "minecraft:feather"
+    },
+    "Z": {
+      "item": "minecraft:emerald_block"
+    }
+  },
+  "result": {
+    "item": "balancedflight:ascended_flight_anchor"
+  }
+}

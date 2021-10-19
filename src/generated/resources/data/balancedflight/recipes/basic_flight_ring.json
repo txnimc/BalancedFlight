@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "HKH",
+    "KWK",
+    "HKH"
+  ],
+  "key": {
+    "H": {
+      "item": "minecraft:iron_ingot"
+    },
+    "K": {
+      "item": "minecraft:quartz_block"
+    },
+    "W": {
+      "item": "minecraft:feather"
+    }
+  },
+  "result": {
+    "item": "balancedflight:basic_flight_ring"
+  }
+}

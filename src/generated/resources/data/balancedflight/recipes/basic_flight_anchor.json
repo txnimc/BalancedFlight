@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FDF",
+    "SMS",
+    "FWF"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:iron_block"
+    },
+    "W": {
+      "item": "minecraft:polished_blackstone"
+    },
+    "D": {
+      "item": "minecraft:gold_block"
+    },
+    "M": {
+      "item": "minecraft:feather"
+    },
+    "F": {
+      "item": "minecraft:polished_blackstone_bricks"
+    }
+  },
+  "result": {
+    "item": "balancedflight:basic_flight_anchor"
+  }
+}

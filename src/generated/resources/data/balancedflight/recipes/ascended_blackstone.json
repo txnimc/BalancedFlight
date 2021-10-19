@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "KXK",
+    "XWX",
+    "KXK"
+  ],
+  "key": {
+    "K": {
+      "item": "minecraft:polished_blackstone"
+    },
+    "X": {
+      "item": "minecraft:gold_ingot"
+    },
+    "W": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "balancedflight:ascended_blackstone"
+  }
+}

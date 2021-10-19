@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TKT",
+    "KYK",
+    "TKT"
+  ],
+  "key": {
+    "K": {
+      "item": "minecraft:gold_block"
+    },
+    "T": {
+      "item": "balancedflight:flight_core"
+    },
+    "Y": {
+      "item": "minecraft:elytra"
+    }
+  },
+  "result": {
+    "item": "balancedflight:ascended_flight_ring"
+  }
+}

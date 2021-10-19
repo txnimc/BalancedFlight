@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YAY",
+    "AXA",
+    "YAY"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:nether_star"
+    },
+    "A": {
+      "item": "minecraft:gold_block"
+    },
+    "Y": {
+      "item": "minecraft:end_stone_bricks"
+    }
+  },
+  "result": {
+    "item": "balancedflight:flight_core"
+  }
+}

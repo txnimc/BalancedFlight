@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.vice.balancedflight.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "balancedflight.refmap.json",
+  "mixins": [
+    "ElytraMixin",
+    "ElytraRocketShiftKeyMixin",
+    "ElytraServerMixin",
+    "ElytraUpdateMixin"
+  ],
+  "minVersion": "0.8"
+}

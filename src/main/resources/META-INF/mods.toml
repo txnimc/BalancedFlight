@@ -11,45 +11,45 @@ loaderVersion="[32,)" #mandatory (32 is current forge version)
 # Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
 license="MIT License"
 # A URL to refer people to when problems occur with this mod
-issueTrackerURL="https://github.com/DenisMasterHerobrine/AngelRing/issues" #optional
+issueTrackerURL="https://github.com/viceversagames/BalancedFlight/issues" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 # The modid of the mod
-modId="angelring" #mandatory
+modId="balancedflight" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
 version="${file.jarVersion}"
  # A display name for the mod
-displayName="Angel Ring" #mandatory
+displayName="Balanced Flight" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
 updateJSONURL="http://myurl.me/" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-displayURL="" #optional
+displayURL="https://github.com/viceversagames/BalancedFlight" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="examplemod.png" #optional
 # A text field displayed in the mod UI
 credits="" #optional
 # A text field displayed in the mod UI
-authors="DenisMasterHerobrine" #optional
+authors="Vice" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 This mod adds an Angel Ring, which allows you to fly, like in a creative mode.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.angelring]]
+[[dependencies.balancedflight]]
     modId="forge"
     mandatory=true
     versionRange="[32,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.angelring]]
+[[dependencies.balancedflight]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.16.4,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.angelring]]
+[[dependencies.balancedflight]]
    modId="curios"
    mandatory=true
    versionRange="[1.16.4-4.0.2.1,)"

@@ -1,0 +1,11 @@
+{
+  "block.balancedflight.ascended_blackstone": "\u01DDuo\u0287s\u029E\u0254\u0250\u05DF\u15FA p\u01DDpu\u01DD\u0254s\u2C6F",
+  "block.balancedflight.ascended_flight_anchor": ")p\u01DDpu\u01DD\u0254s\u2C6F( \u0279o\u0265\u0254u\u2C6F \u0287\u0265b\u0131\u05DF\u2132",
+  "block.balancedflight.basic_flight_anchor": ")\u0254\u0131s\u0250\u15FA( \u0279o\u0265\u0254u\u2C6F \u0287\u0265b\u0131\u05DF\u2132",
+  "block.balancedflight.gilded_flight_anchor": ")p\u01DDp\u05DF\u0131\u2141( \u0279o\u0265\u0254u\u2C6F \u0287\u0265b\u0131\u05DF\u2132",
+  "curios.identifier.flight_ring": "bu\u0131\u1D1A \u0287\u0265b\u0131\u05DF\u2132",
+  "item.balancedflight.ascended_flight_ring": "bu\u0131\u1D1A \u0287\u0265b\u0131\u05DF\u2132 p\u01DDpu\u01DD\u0254s\u2C6F",
+  "item.balancedflight.basic_flight_ring": "bu\u0131\u1D1A \u0287\u0265b\u0131\u05DF\u2132 \u0254\u0131s\u0250\u15FA",
+  "item.balancedflight.flight_core": "\u01DD\u0279o\u0186 \u0287\u0265b\u0131\u05DF\u2132",
+  "itemGroup.balancedflight": "\u0287\u0265b\u0131\u05DF\u2132 p\u01DD\u0254u\u0250\u05DF\u0250\u15FA"
+}

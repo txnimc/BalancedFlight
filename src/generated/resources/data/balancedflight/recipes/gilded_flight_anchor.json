@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YCY",
+    "NPN",
+    "YKY"
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:gold_block"
+    },
+    "K": {
+      "item": "balancedflight:ascended_blackstone"
+    },
+    "C": {
+      "item": "minecraft:diamond_block"
+    },
+    "P": {
+      "item": "minecraft:feather"
+    },
+    "Y": {
+      "item": "minecraft:polished_blackstone_bricks"
+    }
+  },
+  "result": {
+    "item": "balancedflight:gilded_flight_anchor"
+  }
+}

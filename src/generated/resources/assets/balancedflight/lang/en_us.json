@@ -1,0 +1,11 @@
+{
+  "block.balancedflight.ascended_blackstone": "Ascended Blackstone",
+  "block.balancedflight.ascended_flight_anchor": "Flight Anchor (Ascended)",
+  "block.balancedflight.basic_flight_anchor": "Flight Anchor (Basic)",
+  "block.balancedflight.gilded_flight_anchor": "Flight Anchor (Gilded)",
+  "curios.identifier.flight_ring": "Flight Ring",
+  "item.balancedflight.ascended_flight_ring": "Ascended Flight Ring",
+  "item.balancedflight.basic_flight_ring": "Basic Flight Ring",
+  "item.balancedflight.flight_core": "Flight Core",
+  "itemGroup.balancedflight": "Balanced Flight"
+}
