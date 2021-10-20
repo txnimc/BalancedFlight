@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "KXK",
-    "XWX",
-    "KXK"
+    "KIK",
+    "IBI",
+    "KIK"
   ],
   "key": {
+    "I": {
+      "item": "minecraft:gold_block"
+    },
+    "B": {
+      "item": "minecraft:diamond"
+    },
     "K": {
       "item": "minecraft:polished_blackstone"
-    },
-    "X": {
-      "item": "minecraft:gold_ingot"
-    },
-    "W": {
-      "item": "minecraft:diamond"
     }
   },
   "result": {

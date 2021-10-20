@@ -52,6 +52,8 @@ public class BalancedFlight {
         MinecraftForge.EVENT_BUS.register(this);
 
         Registry.init();
+
+        Lang.init();
     }
 
     private void setup(final FMLCommonSetupEvent event)

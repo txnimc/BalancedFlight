@@ -18,15 +18,20 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fml.server.ServerLifecycleHooks;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.time.Instant;
+import java.time.LocalTime;
 import java.util.UUID;
 
 @Mixin(ClientPlayerEntity.class)
 public class ElytraRocketShiftKeyMixin
 {
+    private long LastUsedFireworkTime = 0;
+
     @Inject(at = @At(value = "HEAD"), method = "tick")
     private void setShiftKeyDown(CallbackInfo ci)
     {
@@ -34,15 +39,20 @@ public class ElytraRocketShiftKeyMixin
 
         if (player.isFallFlying() && CuriosCompat.CanFly(player))
         {
-            if (player.input.hasForwardImpulse())
+            if (player.isSprinting() && player.input.hasForwardImpulse())
             {
                 World world = player.level;
 
-                CustomNetworkMessage.Send(world, player, "FIRE_ROCKET");
+                long now = Instant.now().getEpochSecond();
+                if (now - LastUsedFireworkTime > 1)
+                {
+                    CustomNetworkMessage.Send(world, player, "FIRE_ROCKET");
+                    LastUsedFireworkTime = now;
+                }
             }
 
         }
     }
-
-
 }
+
+

@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "YAY",
-    "AXA",
-    "YAY"
+    "ZMZ",
+    "MRM",
+    "ZMZ"
   ],
   "key": {
-    "X": {
-      "item": "minecraft:nether_star"
-    },
-    "A": {
+    "M": {
       "item": "minecraft:gold_block"
     },
-    "Y": {
-      "item": "minecraft:end_stone_bricks"
+    "R": {
+      "item": "minecraft:nether_star"
+    },
+    "Z": {
+      "item": "balancedflight:ascended_blackstone"
     }
   },
   "result": {

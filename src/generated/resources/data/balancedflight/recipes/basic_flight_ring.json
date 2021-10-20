@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "HKH",
-    "KWK",
-    "HKH"
+    "PGP",
+    "GZG",
+    "PGP"
   ],
   "key": {
-    "H": {
-      "item": "minecraft:iron_ingot"
-    },
-    "K": {
+    "G": {
       "item": "minecraft:quartz_block"
     },
-    "W": {
+    "Z": {
       "item": "minecraft:feather"
+    },
+    "P": {
+      "item": "minecraft:iron_ingot"
     }
   },
   "result": {

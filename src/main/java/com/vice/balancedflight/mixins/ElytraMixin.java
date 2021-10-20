@@ -17,11 +17,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+
+
 @Mixin(ClientPlayerEntity.class)
 public class ElytraMixin
 {
-    @Shadow @Final public ClientPlayNetHandler connection;
-
     @Inject(at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/client/entity/player/ClientPlayerEntity;getItemBySlot(Lnet/minecraft/inventory/EquipmentSlotType;)Lnet/minecraft/item/ItemStack;"),
             method = "aiStep()V", cancellable = true)

@@ -16,6 +16,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3i;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
@@ -110,6 +111,9 @@ public class CuriosCompat implements ICurio
         }
         else if (parent.tier == FlightRing.FlightRingType.BASIC)
         {
+            if (player.level.dimension() != World.OVERWORLD)
+                return;
+
             boolean CanFly = FlightAnchorEntity.ActiveAnchors
                 .stream()
                 .anyMatch(anchor -> distSqr(anchor.position, player.position()) < anchor.tier.EffectDistance * anchor.tier.EffectDistance);
@@ -133,6 +137,9 @@ public class CuriosCompat implements ICurio
 
         if (hasAscended)
             return true;
+
+        if (player.level.dimension() != World.OVERWORLD)
+            return false;
 
         return FlightAnchorEntity.ActiveAnchors
                 .stream()

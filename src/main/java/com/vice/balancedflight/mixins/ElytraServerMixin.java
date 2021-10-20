@@ -26,7 +26,7 @@ public class ElytraServerMixin
     {
         if (CuriosCompat.CanFly(this.player))
         {
-            if (!player.isOnGround() && !player.isFallFlying() && !player.isInWater() && !player.hasEffect(Effects.LEVITATION))
+            if (!player.isFallFlying() && !player.isInWater() && !player.hasEffect(Effects.LEVITATION))
             {
                 player.startFallFlying();
                 ci.cancel();
