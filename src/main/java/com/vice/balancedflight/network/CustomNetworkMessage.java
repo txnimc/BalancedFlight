@@ -46,12 +46,9 @@ public class CustomNetworkMessage
     {
         ctx.get().enqueueWork(() ->
         {
-            BalancedFlight.LOGGER.info(this.message);
-
-            switch (this.message)
+            if ("FIRE_ROCKET".equals(this.message))
             {
-                case "FIRE_ROCKET":
-                    FireRocket(this.player);
+                FireRocket(this.player);
             }
         });
         ctx.get().setPacketHandled(true);

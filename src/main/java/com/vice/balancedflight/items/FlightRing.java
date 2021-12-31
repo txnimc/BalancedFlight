@@ -123,11 +123,11 @@ public class FlightRing extends Item {
 
         if (((FlightRing)stack.getItem()).tier == FlightRingType.ASCENDED)
         {
-            tooltip.add(new StringTextComponent("An incredibly dense golden ring. Despite its weight, it allows you to fly anywhere.").withStyle(TextFormatting.GOLD));
+            tooltip.add(new StringTextComponent("An incredibly dense golden ring. Despite its weight, it allows you to fly anywhere (Angel Ring).").withStyle(TextFormatting.GOLD));
             tooltip.add(new StringTextComponent("Allows both creative and enhanced Elytra flight.").withStyle(TextFormatting.WHITE));
         }
         else {
-            tooltip.add(new StringTextComponent("Cheap ring that allows flight around flight anchors.").withStyle(TextFormatting.WHITE));
+            tooltip.add(new StringTextComponent("Cheap ring that allows flight around flight anchors (Angel Ring).").withStyle(TextFormatting.WHITE));
             tooltip.add(new StringTextComponent("Allows both creative and enhanced Elytra flight.").withStyle(TextFormatting.WHITE));
             tooltip.add(new StringTextComponent("Only works in the overworld.").withStyle(TextFormatting.RED));
         }

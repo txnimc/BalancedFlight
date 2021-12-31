@@ -4,6 +4,7 @@ import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.NonNullLazyValue;
 import com.vice.balancedflight.compat.ExternalMods;
+import com.vice.balancedflight.config.BalancedFlightConfig;
 import com.vice.balancedflight.data.BalancedFlightSaveData;
 import com.vice.balancedflight.proxy.ClientProxy;
 import com.vice.balancedflight.proxy.IProxy;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -48,6 +50,7 @@ public class BalancedFlight {
     }
 
     public BalancedFlight() {
+        BalancedFlightConfig.init();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         MinecraftForge.EVENT_BUS.register(this);
 

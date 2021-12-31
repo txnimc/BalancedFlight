@@ -1,11 +1,9 @@
 package com.vice.balancedflight.mixins;
 
-import com.vice.balancedflight.BalancedFlight;
 import com.vice.balancedflight.compat.CuriosCompat;
-import net.minecraft.entity.LivingEntity;
+import com.vice.balancedflight.config.BalancedFlightConfig;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.ServerPlayNetHandler;
-import net.minecraft.network.play.client.CEntityActionPacket;
 import net.minecraft.potion.Effects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,6 +24,11 @@ public class ElytraServerMixin
     {
         if (CuriosCompat.CanFly(this.player))
         {
+            if (player.isOnGround() && !BalancedFlightConfig.enableElytraFlightFromGround.get())
+            {
+                return;
+            }
+
             if (!player.isFallFlying() && !player.isInWater() && !player.hasEffect(Effects.LEVITATION))
             {
                 player.startFallFlying();

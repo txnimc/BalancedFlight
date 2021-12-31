@@ -12,6 +12,7 @@ import com.vice.balancedflight.BalancedFlight;
 import com.vice.balancedflight.Registry;
 import com.vice.balancedflight.items.FlightRing;
 import com.vice.balancedflight.util.RecipeHelper;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -151,6 +152,8 @@ public class FlightAnchor extends Block
     }
 
     public static EnumProperty<AnchorTier> TIER = EnumProperty.create("tier", AnchorTier.class);
+
+
 
     public enum AnchorTier implements IStringSerializable
     {

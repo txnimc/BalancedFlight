@@ -1,6 +1,7 @@
 package com.vice.balancedflight;
 
 import com.vice.balancedflight.compat.CuriosCompat;
+import com.vice.balancedflight.config.BalancedFlightConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.settings.KeyBinding;
@@ -27,7 +28,7 @@ public class KeyboardInput {
 
     @SubscribeEvent
     public static void onKeyboardInput(InputEvent.KeyInputEvent event) {
-        if (TAKE_OFF_KEY.isDown()) {
+        if (TAKE_OFF_KEY.isDown() && BalancedFlightConfig.enableTakeOff.get()) {
             assert Minecraft.getInstance().player != null;
             ClientPlayerEntity player = Minecraft.getInstance().player;
 

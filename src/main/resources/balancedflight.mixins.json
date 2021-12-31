@@ -3,6 +3,7 @@
   "package": "com.vice.balancedflight.mixins",
   "compatibilityLevel": "JAVA_8",
   "refmap": "balancedflight.refmap.json",
+  "plugin": "com.vice.balancedflight.mixins.BalancedFlightMixinPlugin",
   "mixins": [
     "ElytraMixin",
     "ElytraRocketShiftKeyMixin",
