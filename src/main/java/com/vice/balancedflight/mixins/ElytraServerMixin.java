@@ -4,6 +4,7 @@ import com.vice.balancedflight.compat.CuriosCompat;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.effect.MobEffects;
+import com.vice.balancedflight.config.BalancedFlightConfig; 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,6 +25,11 @@ public class ElytraServerMixin
     {
         if (CuriosCompat.CanFly(this.player))
         {
+            if (player.isOnGround() && !BalancedFlightConfig.enableElytraFlightFromGround.get())
+            {
+                return;
+            }
+
             if (!player.isFallFlying() && !player.isInWater() && !player.hasEffect(MobEffects.LEVITATION))
             {
                 player.startFallFlying();
