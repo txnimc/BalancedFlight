@@ -129,7 +129,7 @@ public class CuriosCompat implements ICurio
                 startFlying(player);
             }
 
-            if (!CanFly && player.getAbilities().mayfly) {
+            if (!player.isCreative() && !CanFly && player.getAbilities().mayfly) {
                 stopFlying(player);
                 player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 200));
             }
