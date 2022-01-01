@@ -10,19 +10,16 @@ import com.vice.balancedflight.compat.CuriosCompat;
 import com.vice.balancedflight.compat.ExternalMods;
 import com.vice.balancedflight.util.ModItemTab;
 import com.vice.balancedflight.util.RecipeHelper;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.LazyValue;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
+import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -37,7 +34,7 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = BalancedFlight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class FlightRing extends Item {
 
-    public enum FlightRingType implements IStringSerializable
+    public enum FlightRingType implements StringRepresentable
     {
         BASIC("basic"),
         ASCENDED("ascended");
@@ -71,7 +68,7 @@ public class FlightRing extends Item {
     public final FlightRingType tier;
 
     //region Registry
-    //private static final LazyValue<IItemProvider> FlightCoreItem = new LazyValue(FlightCore.REGISTRATION::get);
+    //private static final LazyValue<ItemLike> FlightCoreItem = new LazyValue(FlightCore.REGISTRATION::get);
 
     public static final RegistryEntry<? extends Item> ASCENDED = RegCommon(FlightRingType.ASCENDED)
             .recipe((gen, prov) ->
@@ -110,7 +107,7 @@ public class FlightRing extends Item {
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(final ItemStack stack, CompoundNBT unused) {
+    public ICapabilityProvider initCapabilities(final ItemStack stack, CompoundTag unused) {
         if (ExternalMods.CURIOS.isLoaded()) {
             return CuriosCompat.initCapabilities((FlightRing) stack.getItem());
         }
@@ -119,17 +116,17 @@ public class FlightRing extends Item {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag p_41424_) {
 
         if (((FlightRing)stack.getItem()).tier == FlightRingType.ASCENDED)
         {
-            tooltip.add(new StringTextComponent("An incredibly dense golden ring. Despite its weight, it allows you to fly anywhere.").withStyle(TextFormatting.GOLD));
-            tooltip.add(new StringTextComponent("Allows both creative and enhanced Elytra flight.").withStyle(TextFormatting.WHITE));
+            tooltip.add(new TextComponent("An incredibly dense golden ring. Despite its weight, it allows you to fly anywhere.").withStyle(ChatFormatting.GOLD));
+            tooltip.add(new TextComponent("Allows both creative and enhanced Elytra flight.").withStyle(ChatFormatting.WHITE));
         }
         else {
-            tooltip.add(new StringTextComponent("Cheap ring that allows flight around flight anchors.").withStyle(TextFormatting.WHITE));
-            tooltip.add(new StringTextComponent("Allows both creative and enhanced Elytra flight.").withStyle(TextFormatting.WHITE));
-            tooltip.add(new StringTextComponent("Only works in the overworld.").withStyle(TextFormatting.RED));
+            tooltip.add(new TextComponent("Cheap ring that allows flight around flight anchors.").withStyle(ChatFormatting.WHITE));
+            tooltip.add(new TextComponent("Allows both creative and enhanced Elytra flight.").withStyle(ChatFormatting.WHITE));
+            tooltip.add(new TextComponent("Only works in the overworld.").withStyle(ChatFormatting.RED));
         }
     }
 

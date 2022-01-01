@@ -8,7 +8,7 @@
   "item.balancedflight.basic_flight_ring": "Basic Flight Ring",
   "item.balancedflight.flight_core": "Flight Core",
   "itemGroup.balancedflight": "Balanced Flight",
-  "balancedflight.ascended_blackstone.tooltip": "Crafting item for Flight Anchors and Flight Cores.",
+  "tooltip.balancedflight.ascended_blackstone": "Crafting item for Flight Anchors and Flight Cores.",
   "tooltip.balancedflight.ascended_flight_anchor": "Allows flight in a 100 block radius. Only works in the overworld.",
   "tooltip.balancedflight.ascended_flight_ring": "An incredibly dense golden ring, and yet, it allows flight anywhere.",
   "tooltip.balancedflight.basic_flight_anchor": "Allows flight in a 25 block radius. Only works in the overworld.",

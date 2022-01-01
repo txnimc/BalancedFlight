@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "PGP",
-    "GZG",
-    "PGP"
+    "GWG",
+    "WQW",
+    "GWG"
   ],
   "key": {
-    "G": {
+    "W": {
       "item": "minecraft:quartz_block"
     },
-    "Z": {
+    "Q": {
       "item": "minecraft:feather"
     },
-    "P": {
+    "G": {
       "item": "minecraft:iron_ingot"
     }
   },

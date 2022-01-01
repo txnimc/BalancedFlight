@@ -1,20 +1,19 @@
 package com.vice.balancedflight;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
-import com.tterrag.registrate.util.entry.TileEntityEntry;
+import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import com.tterrag.registrate.util.entry.RegistryEntry; 
 import com.vice.balancedflight.blocks.FlightAnchor;
 import com.vice.balancedflight.blocks.FlightAnchorEntity;
 import com.vice.balancedflight.items.FlightRing;
 import com.vice.balancedflight.util.ModItemTab;
 import com.vice.balancedflight.util.RecipeHelper;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 
 public class Registry
 {
@@ -22,13 +21,14 @@ public class Registry
     public static final RegistryEntry<? extends Block> GILDED_FLIGHT_ANCHOR = FlightAnchor.GILDED;
     public static final RegistryEntry<? extends Block> ASCENDED_FLIGHT_ANCHOR = FlightAnchor.ASCENDED;
 
-    public static final TileEntityEntry<TileEntity> FLIGHT_ANCHOR_ENTITY = FlightAnchorEntity.REGISTRATION;
+    public static final BlockEntityEntry<FlightAnchorEntity> FLIGHT_ANCHOR_ENTITY = FlightAnchorEntity.REGISTRATION;
 
     public static final RegistryEntry<? extends Block> ASCENDED_BLACKSTONE = BalancedFlight.registrate()
             .block("ascended_blackstone", Block::new)
-            .properties(props -> AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).strength(5).sound(SoundType.GILDED_BLACKSTONE))
+            .properties(props -> BlockBehaviour.Properties.of(Material.STONE).strength(5).sound(SoundType.GILDED_BLACKSTONE))
             .defaultBlockstate()
             .defaultLoot()
+            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .item()
             .recipe((gen, prov) -> RecipeHelper.Shaped(prov, gen.get())
                     .Row(Items.POLISHED_BLACKSTONE, Items.GOLD_BLOCK, Items.POLISHED_BLACKSTONE)

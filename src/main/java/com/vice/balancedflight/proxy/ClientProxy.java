@@ -1,10 +1,11 @@
 package com.vice.balancedflight.proxy;
 
-import net.minecraft.world.World;
+
+import net.minecraft.world.level.Level;
 
 public class ClientProxy implements IProxy {
     @Override
-    public World getClientWorld() {
+    public Level getClientLevel() {
         // Not required anymore.
         return null;
     }

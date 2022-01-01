@@ -1,45 +1,44 @@
 package com.vice.balancedflight.blocks;
 
-import com.tterrag.registrate.util.entry.TileEntityEntry;
+import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.vice.balancedflight.BalancedFlight;
-import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
 
-public class FlightAnchorEntity extends TileEntity implements ITickableTileEntity
+public class FlightAnchorEntity extends BlockEntity //implements TickingBlockEntity
 {
     public static ArrayList<AnchorConfig> ActiveAnchors = new ArrayList<AnchorConfig>();
 
-    private boolean HasSetPosition = false;
+    //private boolean HasSetPosition = false;
 
-    public FlightAnchorEntity(TileEntityType type)
+    public FlightAnchorEntity(BlockEntityType type, BlockPos pos, BlockState state)
     {
-        super(type);
+        super(type, pos, state);
+
+        AddAnchor();
     }
 
-    public static final TileEntityEntry<TileEntity> REGISTRATION = BalancedFlight.registrate()
-            .tileEntity("flight_anchor", type -> new FlightAnchorEntity(type))
-            .validBlock(FlightAnchor.ASCENDED::get)
-            .validBlock(FlightAnchor.BASIC::get)
-            .validBlock(FlightAnchor.GILDED::get)
+    public static final BlockEntityEntry<FlightAnchorEntity> REGISTRATION = BalancedFlight.registrate()
+            .blockEntity("flight_anchor", FlightAnchorEntity::new)
+            .validBlock(FlightAnchor.ASCENDED)
+            .validBlock(FlightAnchor.BASIC)
+            .validBlock(FlightAnchor.GILDED)
             .register();
 
 
-    @Override
-    public void setRemoved() {
-        super.setRemoved();
-
-        if(level.isClientSide)
-            return;
-
-        ActiveAnchors.removeIf(anchor -> anchor.position.equals(this.worldPosition));
-    }
+//    @Override
+//    public void setRemoved() {
+//        super.setRemoved();
+//
+//        if(level.isClientSide)
+//            return;
+//
+//        ActiveAnchors.removeIf(anchor -> anchor.position.equals(this.worldPosition));
+//    }
 
 
     public void AddAnchor() {
@@ -49,14 +48,20 @@ public class FlightAnchorEntity extends TileEntity implements ITickableTileEntit
         ActiveAnchors.add(new AnchorConfig(this.worldPosition, this.getBlockState().getValue(FlightAnchor.TIER)));
     }
 
-    @Override
-    public void tick()
-    {
-        if (HasSetPosition)
-            return;
+//    @Override
+//    public void tick()
+//    {
+//        if (HasSetPosition)
+//            return;
+//
+//        AddAnchor();
+//    }
 
-        AddAnchor();
-    }
+//    @Override
+//    public BlockPos getPos()
+//    {
+//        return this.worldPosition;
+//    }
 
     public class AnchorConfig {
         public final BlockPos position;

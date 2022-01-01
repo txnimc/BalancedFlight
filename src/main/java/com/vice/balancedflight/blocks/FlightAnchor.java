@@ -12,44 +12,36 @@ import com.vice.balancedflight.BalancedFlight;
 import com.vice.balancedflight.Registry;
 import com.vice.balancedflight.items.FlightRing;
 import com.vice.balancedflight.util.RecipeHelper;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.data.ModelTextures;
-import net.minecraft.data.ShapedRecipeBuilder;
-import net.minecraft.data.StockModelShapes;
-import net.minecraft.data.StockTextureAliases;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -62,7 +54,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = BalancedFlight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class FlightAnchor extends Block
+public class FlightAnchor extends BaseEntityBlock
 {
     public FlightAnchor(Properties p_i48440_1_, AnchorTier tier)
     {
@@ -71,20 +63,21 @@ public class FlightAnchor extends Block
     }
 
     @Override
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(TIER);
         super.createBlockStateDefinition(builder);
     }
 
+    @org.jetbrains.annotations.Nullable
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state)
+    {
+        return new FlightAnchorEntity(FlightAnchorEntity.REGISTRATION.get(), pos, state);
     }
 
-    @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new FlightAnchorEntity(FlightAnchorEntity.REGISTRATION.get());
+    public @NotNull RenderShape getRenderShape(BlockState p_49232_) {
+        return RenderShape.MODEL;
     }
 
     public static final RegistryEntry<? extends Block> BASIC = FlightAnchorCommon("basic", "(Basic)", AnchorTier.BASIC)
@@ -130,8 +123,10 @@ public class FlightAnchor extends Block
                                 return ConfiguredModel.builder().modelFile(models).build();
                             });
                 })
-                .properties(properties -> AbstractBlock.Properties.of(Material.HEAVY_METAL).harvestTool(ToolType.PICKAXE).strength(100).sound(SoundType.NETHERITE_BLOCK))
+                .properties(properties -> BlockBehaviour.Properties.of(Material.HEAVY_METAL).strength(100).sound(SoundType.NETHERITE_BLOCK))
                 .defaultLoot()
+                .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .tag(BlockTags.NEEDS_IRON_TOOL)
                 .item((block, props) -> new AnchorItem(tier, block, props))
                 .initialProperties(() -> new Item.Properties().stacksTo(1))
                 .model((ctx, prov) -> {
@@ -152,7 +147,8 @@ public class FlightAnchor extends Block
 
     public static EnumProperty<AnchorTier> TIER = EnumProperty.create("tier", AnchorTier.class);
 
-    public enum AnchorTier implements IStringSerializable
+
+    public enum AnchorTier implements StringRepresentable
     {
         BASIC("basic", 25),
         GILDED("gilded", 50),
@@ -183,7 +179,8 @@ public class FlightAnchor extends Block
 
 }
 
-class AnchorItem extends BlockItem {
+class AnchorItem extends BlockItem
+{
 
     FlightAnchor.AnchorTier tier;
 
@@ -195,9 +192,11 @@ class AnchorItem extends BlockItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag)
+    public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag p_41424_)
     {
-        tooltip.add(new StringTextComponent("Allows flight in a " + (int) tier.EffectDistance + " block distance.").withStyle(TextFormatting.WHITE));
-        tooltip.add(new StringTextComponent("Only works in the overworld.").withStyle(TextFormatting.RED));
+        {
+            tooltip.add(new TextComponent("Allows flight in a " + (int) tier.EffectDistance + " block distance.").withStyle(ChatFormatting.WHITE));
+            tooltip.add(new TextComponent("Only works in the overworld.").withStyle(ChatFormatting.RED));
+        }
     }
 }

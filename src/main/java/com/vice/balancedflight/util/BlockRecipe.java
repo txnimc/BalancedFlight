@@ -1,25 +1,26 @@
 package com.vice.balancedflight.util;
 
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.ShapedRecipeBuilder;
-import net.minecraft.data.ShapelessRecipeBuilder;
-import net.minecraft.util.IItemProvider;
+
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Consumer;
 
 public class BlockRecipe
 {
-    Consumer<IFinishedRecipe> consumer;
-    IItemProvider BlockItem;
+    Consumer<FinishedRecipe> consumer;
+    ItemLike BlockItem;
 
-    public BlockRecipe(Consumer<IFinishedRecipe> consumer, IItemProvider BlockItem)
+    public BlockRecipe(Consumer<FinishedRecipe> consumer, ItemLike BlockItem)
     {
         this.consumer = consumer;
         this.BlockItem = BlockItem;
     }
 
-    public void MadeFrom(IItemProvider IngotItem)
+    public void MadeFrom(ItemLike IngotItem)
     {
         // block recipe
         ShapedRecipeBuilder.shaped(BlockItem)
@@ -27,13 +28,13 @@ public class BlockRecipe
                 .pattern("xxx")
                 .pattern("xxx")
                 .define('x', IngotItem)
-                .unlockedBy(IngotItem.toString(), InventoryChangeTrigger.Instance.hasItems(IngotItem))
+                .unlockedBy(IngotItem.toString(), InventoryChangeTrigger.TriggerInstance.hasItems(IngotItem))
                 .save(consumer);
 
         // ingot recipe
         ShapelessRecipeBuilder.shapeless(IngotItem, 9)
                 .requires(BlockItem, 1)
-                .unlockedBy(IngotItem.toString(), InventoryChangeTrigger.Instance.hasItems(BlockItem))
+                .unlockedBy(IngotItem.toString(), InventoryChangeTrigger.TriggerInstance.hasItems(BlockItem))
                 .save(consumer);
     }
 }

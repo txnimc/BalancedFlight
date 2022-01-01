@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "balancedflight:basic_flight_anchor",
+    "balancedflight:gilded_flight_anchor",
+    "balancedflight:ascended_flight_anchor",
+    "balancedflight:ascended_blackstone"
+  ]
+}

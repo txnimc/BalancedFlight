@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "KIK",
-    "IBI",
-    "KIK"
+    "XSX",
+    "SVS",
+    "XSX"
   ],
   "key": {
-    "I": {
+    "S": {
       "item": "minecraft:gold_block"
     },
-    "B": {
-      "item": "minecraft:diamond"
-    },
-    "K": {
+    "X": {
       "item": "minecraft:polished_blackstone"
+    },
+    "V": {
+      "item": "minecraft:diamond"
     }
   },
   "result": {

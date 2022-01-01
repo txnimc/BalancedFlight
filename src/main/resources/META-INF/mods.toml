@@ -31,27 +31,25 @@ credits="" #optional
 # A text field displayed in the mod UI
 authors="Vice" #optional
 # The description text for the mod (multi line!) (#mandatory)
-description='''
-This mod adds an Angel Ring, which allows you to fly, like in a creative mode.
-'''
-# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+description="This mod adds an Angel Ring, which allows you to fly, like in a creative mode."
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional
 [[dependencies.balancedflight]]
     modId="forge"
     mandatory=true
-    versionRange="[32,)"
+    versionRange="[39,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.balancedflight]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.4,)"
+    versionRange="[1.18.1,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.balancedflight]]
    modId="curios"
    mandatory=true
-   versionRange="[1.16.4-4.0.2.1,)"
+   versionRange="[1.18.1-5.0.4.2,)"
    ordering="AFTER"
    side="BOTH"

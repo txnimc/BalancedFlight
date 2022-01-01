@@ -19,6 +19,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
+apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
 boolean dev = System.getenv('RELEASE') == null || System.getenv('RELEASE').equals('false');
 
@@ -28,8 +29,6 @@ project.buildnumber = System.getenv('BUILD_NUMBER') != null ? System.getenv('BUI
 version = "mc${minecraft_version}_v${mod_version}" + (dev && !buildnumber.equals("custom") ? "+${buildnumber}" : '')
 group = 'com.vice.balancedflight'
 archivesBaseName = 'balancedflight'
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
 minecraft {
     mappings channel: 'official', version: "${minecraft_version}"
@@ -89,6 +88,10 @@ sourceSets.main.resources {
     srcDir 'src/generated/resources'
 }
 
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 mixin {
     add sourceSets.main, "balancedflight.refmap.json"
 }
@@ -115,17 +118,17 @@ configurations {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    def registrate = "com.tterrag.registrate:Registrate:MC1.16.5-${registrate_version}"
+    def registrate = "com.tterrag.registrate:Registrate:MC1.18-${registrate_version}"
     implementation fg.deobf(registrate)
     shade registrate
 
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.5.1")
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.5.1:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.1-5.0.4.2")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.1-5.0.4.2:api")
 
-    runtimeOnly fg.deobf("curse.maven:jei-238222:3438494")
-    runtimeOnly fg.deobf("curse.maven:jer-240630:3066754")
-    runtimeOnly fg.deobf("curse.maven:hwyla-253449:3033593")
-    runtimeOnly fg.deobf("curse.maven:cyclic-239286:3491138")
+   runtimeOnly fg.deobf("curse.maven:jei-238222:3574041")
+   //runtimeOnly fg.deobf("curse.maven:jer-240630:3066754")
+   //runtimeOnly fg.deobf("curse.maven:hwyla-253449:3033593")
+   //runtimeOnly fg.deobf("curse.maven:cyclic-239286:3491138")
 
     // i'll leave this here commented for easier testing
     //runtimeOnly fg.deobf("vazkii.arl:AutoRegLib:1.4-35.69")
@@ -133,7 +136,7 @@ dependencies {
     //runtimeOnly fg.deobf("slimeknights.mantle:Mantle:1.16.5-1.6.115")
     //runtimeOnly fg.deobf("slimeknights.tconstruct:TConstruct:1.16.5-3.1.1.252")
 
-    annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
+    annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
 }
 
 jar {

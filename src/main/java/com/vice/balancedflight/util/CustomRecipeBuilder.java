@@ -1,9 +1,9 @@
 package com.vice.balancedflight.util;
 
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.ShapedRecipeBuilder;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.world.level.ItemLike;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -15,29 +15,29 @@ import java.util.stream.Collectors;
 
 public class CustomRecipeBuilder
 {
-    Consumer<IFinishedRecipe> consumer;
-    IItemProvider BlockItem;
+    Consumer<FinishedRecipe> consumer;
+    ItemLike BlockItem;
 
-    private final HashMap<IItemProvider, Character> definitionLookup = new HashMap<>();
-    private final List<List<IItemProvider>> Rows = new ArrayList<>();
+    private final HashMap<ItemLike, Character> definitionLookup = new HashMap<>();
+    private final List<List<ItemLike>> Rows = new ArrayList<>();
 
-    private IItemProvider UnlockedBy;
+    private ItemLike UnlockedBy;
 
-    public CustomRecipeBuilder(Consumer<IFinishedRecipe> consumer, IItemProvider BlockItem)
+    public CustomRecipeBuilder(Consumer<FinishedRecipe> consumer, ItemLike BlockItem)
     {
         this.consumer = consumer;
         this.BlockItem = BlockItem;
     }
 
-    public CustomRecipeBuilder UnlockedBy(IItemProvider unlockedBy)
+    public CustomRecipeBuilder UnlockedBy(ItemLike unlockedBy)
     {
         UnlockedBy = unlockedBy;
         return this;
     }
 
-    public CustomRecipeBuilder Row(@Nullable IItemProvider item1, @Nullable IItemProvider item2, @Nullable IItemProvider item3)
+    public CustomRecipeBuilder Row(@Nullable ItemLike item1, @Nullable ItemLike item2, @Nullable ItemLike item3)
     {
-        ArrayList<IItemProvider> row = new ArrayList<>(3);
+        ArrayList<ItemLike> row = new ArrayList<>(3);
         Rows.add(row);
 
         AddItem(row, item1);
@@ -47,9 +47,9 @@ public class CustomRecipeBuilder
         return this;
     }
 
-    public CustomRecipeBuilder Row(@Nullable IItemProvider item1, @Nullable IItemProvider item2)
+    public CustomRecipeBuilder Row(@Nullable ItemLike item1, @Nullable ItemLike item2)
     {
-        ArrayList<IItemProvider> row = new ArrayList<>(2);
+        ArrayList<ItemLike> row = new ArrayList<>(2);
         Rows.add(row);
 
         AddItem(row, item1);
@@ -58,9 +58,9 @@ public class CustomRecipeBuilder
         return this;
     }
 
-    public CustomRecipeBuilder Row(@Nullable IItemProvider item1)
+    public CustomRecipeBuilder Row(@Nullable ItemLike item1)
     {
-        ArrayList<IItemProvider> row = new ArrayList<>(1);
+        ArrayList<ItemLike> row = new ArrayList<>(1);
         Rows.add(row);
 
         AddItem(row, item1);
@@ -68,7 +68,7 @@ public class CustomRecipeBuilder
         return this;
     }
 
-    private void AddItem(ArrayList<IItemProvider> row, IItemProvider item)
+    private void AddItem(ArrayList<ItemLike> row, ItemLike item)
     {
         row.add(item);
 
@@ -94,7 +94,7 @@ public class CustomRecipeBuilder
     {
         ShapedRecipeBuilder builder = ShapedRecipeBuilder.shaped(BlockItem);
 
-        for (List<IItemProvider> row : Rows)
+        for (List<ItemLike> row : Rows)
         {
             String pattern = row
                     .stream()
@@ -104,12 +104,12 @@ public class CustomRecipeBuilder
             builder.pattern(pattern);
         }
 
-        for (HashMap.Entry<IItemProvider, Character> definition : definitionLookup.entrySet())
+        for (HashMap.Entry<ItemLike, Character> definition : definitionLookup.entrySet())
         {
             builder.define(definition.getValue(), definition.getKey());
         }
 
-        builder.unlockedBy(UnlockedBy.toString(), InventoryChangeTrigger.Instance.hasItems(UnlockedBy));
+        builder.unlockedBy(UnlockedBy.toString(), InventoryChangeTrigger.TriggerInstance.hasItems(UnlockedBy));
         builder.save(consumer);
     }
 

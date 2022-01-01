@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "GFG",
-    "FNF",
-    "GFG"
+    "KPK",
+    "PRP",
+    "KPK"
   ],
   "key": {
-    "G": {
-      "item": "balancedflight:flight_core"
-    },
-    "F": {
+    "P": {
       "item": "minecraft:gold_block"
     },
-    "N": {
+    "R": {
       "item": "minecraft:elytra"
+    },
+    "K": {
+      "item": "balancedflight:flight_core"
     }
   },
   "result": {

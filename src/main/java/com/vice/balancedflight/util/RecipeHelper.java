@@ -1,10 +1,8 @@
 package com.vice.balancedflight.util;
+ 
 
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.ShapedRecipeBuilder;
-import net.minecraft.data.ShapelessRecipeBuilder;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.level.ItemLike;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -16,12 +14,12 @@ import java.util.stream.Collectors;
 
 public class RecipeHelper
 {
-    public static BlockRecipe Block(Consumer<IFinishedRecipe> consumer, IItemProvider BlockItem)
+    public static BlockRecipe Block(Consumer<FinishedRecipe> consumer, ItemLike BlockItem)
     {
         return new BlockRecipe(consumer, BlockItem);
     }
 
-    public static CustomRecipeBuilder Shaped(Consumer<IFinishedRecipe> consumer, IItemProvider BlockItem)
+    public static CustomRecipeBuilder Shaped(Consumer<FinishedRecipe> consumer, ItemLike BlockItem)
     {
         return new CustomRecipeBuilder(consumer, BlockItem);
     }
