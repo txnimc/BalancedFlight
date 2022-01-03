@@ -5,6 +5,7 @@
   "refmap": "balancedflight.refmap.json",
   "plugin": "com.vice.balancedflight.mixins.BalancedFlightMixinPlugin",
   "mixins": [
+    "ConnectionAccessor",
     "ElytraMixin",
     "ElytraRocketShiftKeyMixin",
     "ElytraServerMixin",

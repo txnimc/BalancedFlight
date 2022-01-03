@@ -4,11 +4,15 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.vice.balancedflight.blocks.FlightAnchorEntity;
+import com.vice.balancedflight.config.BalancedFlightConfig;
 import com.vice.balancedflight.items.FlightRing;
+import com.vice.balancedflight.mixins.ConnectionAccessor;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.client.CEntityActionPacket;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -103,47 +107,74 @@ public class CuriosCompat implements ICurio
 
         PlayerEntity player = ((PlayerEntity) livingEntity);
 
-        if (parent.tier == FlightRing.FlightRingType.ASCENDED)
+        // allow creative flight anywhere
+        if (IsWithinFlightRange(player))
         {
-            if (!player.abilities.mayfly) {
+            if (parent.tier == FlightRing.FlightRingType.BASIC && BalancedFlightConfig.basicRingGivesCreativeFlight.get())
                 startFlying(player);
-            }
+            else if (parent.tier == FlightRing.FlightRingType.ASCENDED &&
+                    (BalancedFlightConfig.ascendedRingGivesCreativeFlight.get() || BalancedFlightConfig.basicRingGivesCreativeFlight.get()))
+                startFlying(player);
+
+            return;
         }
-        else if (parent.tier == FlightRing.FlightRingType.BASIC)
+
+        //allow unlimited creative flight if enabled
+        if (parent.tier == FlightRing.FlightRingType.ASCENDED && BalancedFlightConfig.ascendedRingGivesCreativeFlight.get())
         {
-            if (player.level.dimension() != World.OVERWORLD)
-                return;
+            startFlying(player);
+            return;
+        }
 
-            boolean CanFly = FlightAnchorEntity.ActiveAnchors
-                .stream()
-                .anyMatch(anchor -> distSqr(anchor.position, player.position()) < anchor.tier.EffectDistance * anchor.tier.EffectDistance);
-
-            if (CanFly && !player.abilities.mayfly) {
-                startFlying(player);
-            }
-
-            if (!player.isCreative() && !CanFly && player.abilities.mayfly) {
-                stopFlying(player);
-                player.addEffect(new EffectInstance(Effects.SLOW_FALLING, 200));
-            }
+        // turn off flying if out of range.
+        if (!player.isCreative() && player.abilities.mayfly)
+        {
+            stopFlying(player);
+            // handle falling out of sky
+            player.addEffect(new EffectInstance(Effects.SLOW_FALLING, 200));
         }
     }
 
-    public static boolean CanFly(PlayerEntity player) {
+    public static boolean HasRingAllowingElytraFlight(PlayerEntity player) {
+        boolean hasAscended = HasAscendedRing(player);
+        boolean hasBasic = HasBasicRing(player);
 
-        boolean hasAscended = isRingInCuriosSlot(FlightRing.ASCENDED.get(), player);
-        if (!hasAscended && !isRingInCuriosSlot(FlightRing.BASIC.get(), player))
+        if (!hasAscended && !hasBasic)
             return false;
 
-        if (hasAscended)
-            return true;
+        if (hasAscended && !BalancedFlightConfig.enableAscendedElytraFlight.get())
+            return false;
 
+        if (hasBasic && !BalancedFlightConfig.enableBasicElytraFlight.get())
+            return false;
+
+        return true;
+    }
+
+
+    public static boolean HasAnyRing(PlayerEntity player) {
+        return HasBasicRing(player) || HasAscendedRing(player);
+    }
+
+    public static boolean HasBasicRing(PlayerEntity player) {
+        return CuriosCompat.isRingInCuriosSlot(FlightRing.BASIC.get(), player);
+    }
+
+    public static boolean HasAscendedRing(PlayerEntity player) {
+        return CuriosCompat.isRingInCuriosSlot(FlightRing.ASCENDED.get(), player);
+    }
+
+
+    public static boolean IsWithinFlightRange(PlayerEntity player)
+    {
         if (player.level.dimension() != World.OVERWORLD)
             return false;
 
+        double anchorDistanceMultiplier = BalancedFlightConfig.anchorDistanceMultiplier.get();
+
         return FlightAnchorEntity.ActiveAnchors
                 .stream()
-                .anyMatch(anchor -> distSqr(anchor.position, player.position()) < anchor.tier.EffectDistance * anchor.tier.EffectDistance);
+                .anyMatch(anchor -> distSqr(anchor.position, player.position()) < (anchorDistanceMultiplier * anchor.tier.EffectDistance) * (anchorDistanceMultiplier * anchor.tier.EffectDistance));
     }
 
     public static double distSqr(Vector3i vec, Vector3d other) {
@@ -154,7 +185,7 @@ public class CuriosCompat implements ICurio
 
     @Override
     public boolean canEquip(String identifier, LivingEntity entityLivingBase) {
-        return !isRingInCuriosSlot(FlightRing.ASCENDED.get(), entityLivingBase) && !isRingInCuriosSlot(FlightRing.BASIC.get(), entityLivingBase);
+        return !HasAnyRing((PlayerEntity) entityLivingBase);
     }
 
     public static boolean isRingInCuriosSlot(Item balancedflight, LivingEntity player) {

@@ -32,7 +32,7 @@ public class KeyboardInput {
             assert Minecraft.getInstance().player != null;
             ClientPlayerEntity player = Minecraft.getInstance().player;
 
-            if (player.isOnGround() && !player.isFallFlying() && CuriosCompat.CanFly(player)) {
+            if (player.isOnGround() && !player.isFallFlying() && CuriosCompat.HasAnyRing(player) && CuriosCompat.IsWithinFlightRange(player)) {
                 Vector3d vector3d = player.getLookAngle();
                 double d0 = 1.5D;
                 double d1 = 0.1D;

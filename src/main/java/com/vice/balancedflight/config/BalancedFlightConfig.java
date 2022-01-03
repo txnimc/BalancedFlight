@@ -16,17 +16,39 @@ public class BalancedFlightConfig
     public static ConfigValue<Boolean> enableElytraFlightFromGround;
     public static ConfigValue<Boolean> enableTakeOff;
     public static ConfigValue<Boolean> infiniteRockets;
-    public static ConfigValue<Boolean> enableElytraFlight;
+
+    public static ConfigValue<Boolean> enableBasicElytraFlight;
+    public static ConfigValue<Boolean> enableAscendedElytraFlight;
+
+    public static ConfigValue<Boolean> disableFallDamageWithRings;
+    public static ConfigValue<Boolean> disableElytraDamageWithRings;
+
+    public static ConfigValue<Boolean> basicRingGivesCreativeFlight;
+    public static ConfigValue<Boolean> ascendedRingGivesCreativeFlight;
+
+    public static ConfigValue<Double> anchorDistanceMultiplier;
 
     static
     {
-        ConfigBuilder builder = new ConfigBuilder("Dynamic Lights Settings");
+        ConfigBuilder builder = new ConfigBuilder("Balanced Flight Settings");
 
-        builder.Block("Misc", b -> {
+        builder.Block("Flight Options", b -> {
+            basicRingGivesCreativeFlight = b.define("Basic Ring Gives Creative Flight", false);
+            ascendedRingGivesCreativeFlight = b.define("Ascended Ring Gives Creative Flight", false);
+            enableBasicElytraFlight = b.define("Basic Flight Ring Also Works As Elytra", true);
+            enableAscendedElytraFlight = b.define("Ascended Ring Also Works As Elytra", true);
+        });
+
+        builder.Block("Balancing Config", b -> {
+            anchorDistanceMultiplier = b.defineInRange("Anchor Distance Multiplier (0->10)", 1.0d, 0.0d, 10.0d);
+            disableFallDamageWithRings = b.define("Disable Fall Damage When Wearing Rings", true);
+            disableElytraDamageWithRings = b.define("Disable Elytra Damage When Wearing Rings", true);
+        });
+
+        builder.Block("Enhanced Elytra Mechanics", b -> {
             enableElytraFlightFromGround = b.define("Enable Elytra Flight From Ground", true);
             enableTakeOff =  b.define("Enable Take Off Mechanic", true);
             infiniteRockets = b.define("Infinite Rockets", true);
-            enableElytraFlight = b.define("Flight Ring Also Works As Elytra", true);
         });
 
         ConfigSpec = builder.Save();

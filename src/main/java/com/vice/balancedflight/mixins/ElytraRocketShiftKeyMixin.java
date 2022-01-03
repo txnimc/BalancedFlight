@@ -2,6 +2,7 @@ package com.vice.balancedflight.mixins;
 
 import com.vice.balancedflight.BalancedFlight;
 import com.vice.balancedflight.compat.CuriosCompat;
+import com.vice.balancedflight.config.BalancedFlightConfig;
 import com.vice.balancedflight.network.BalancedFlightNetwork;
 import com.vice.balancedflight.network.CustomNetworkMessage;
 import net.minecraft.client.Minecraft;
@@ -37,7 +38,7 @@ public class ElytraRocketShiftKeyMixin
     {
         ClientPlayerEntity player = (ClientPlayerEntity) (Object) this;
 
-        if (player.isFallFlying() && CuriosCompat.CanFly(player))
+        if (player.isFallFlying() && BalancedFlightConfig.infiniteRockets.get() && CuriosCompat.HasRingAllowingElytraFlight(player))
         {
             if (player.isSprinting() && player.input.hasForwardImpulse())
             {

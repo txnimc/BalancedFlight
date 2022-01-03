@@ -137,7 +137,6 @@ dependencies {
 }
 
 jar {
-    classifier = 'slim'
     manifest {
         attributes([
                 "Specification-Title": "balancedflight",
@@ -176,7 +175,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 }
 
 artifacts {
-    archives jar, shadowJar, sourcesJar, javadocJar
+    archives jar
 }
 
 publishing {

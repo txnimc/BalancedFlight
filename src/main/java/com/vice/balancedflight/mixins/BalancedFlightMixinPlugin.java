@@ -43,7 +43,7 @@ public class BalancedFlightMixinPlugin implements IMixinConfigPlugin
         String mixin = mixinClassName.substring(MIXIN_PACKAGE_ROOT.length());
 
         if (mixin.equals("ElytraMixin") || mixin.equals("ElytraServerMixin")|| mixin.equals("ElytraUpdateMixin")) {
-            return BalancedFlightConfig.enableElytraFlight.get();
+            return BalancedFlightConfig.enableBasicElytraFlight.get() || BalancedFlightConfig.enableAscendedElytraFlight.get();
         }
 
         if (mixin.equals("ElytraRocketShiftKeyMixin")) {
