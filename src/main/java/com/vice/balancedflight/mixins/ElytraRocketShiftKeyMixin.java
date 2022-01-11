@@ -2,6 +2,7 @@ package com.vice.balancedflight.mixins;
 
 
 import com.vice.balancedflight.compat.CuriosCompat;
+import com.vice.balancedflight.config.Config;
 import com.vice.balancedflight.network.CustomNetworkMessage;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.level.Level;
@@ -22,8 +23,12 @@ public class ElytraRocketShiftKeyMixin
     {
         LocalPlayer player = (LocalPlayer) (Object) this;
 
-        if (player.isFallFlying() && CuriosCompat.CanFly(player))
+        if (player.isFallFlying() && Config.infiniteRockets.get())
         {
+            CuriosCompat.FlightMode allowed = CuriosCompat.AllowedFlightModes(player, true);
+            if (!allowed.canElytraFly())
+                return;
+
             if (player.isSprinting() && player.input.hasForwardImpulse())
             {
                 Level world = player.level;

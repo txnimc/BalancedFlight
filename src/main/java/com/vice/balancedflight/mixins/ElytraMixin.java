@@ -5,6 +5,7 @@ import com.vice.balancedflight.compat.CuriosCompat;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.protocol.game.ServerboundPlayerCommandPacket;
 import net.minecraft.world.effect.MobEffects;
+import com.vice.balancedflight.config.Config;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,14 +20,16 @@ public class ElytraMixin
 
     private void tryToStartFallFlying(CallbackInfo ci) {
         LocalPlayer player = (LocalPlayer) (Object) this;
-        if (CuriosCompat.CanFly(player))
+
+        if (!player.isOnGround() && !player.isFallFlying() && !player.isInWater() && !player.hasEffect(MobEffects.LEVITATION))
         {
-            if (!player.isOnGround() && !player.isFallFlying() && !player.isInWater() && !player.hasEffect(MobEffects.LEVITATION))
-            {
-                player.startFallFlying();
-                player.connection.send(new ServerboundPlayerCommandPacket(player, ServerboundPlayerCommandPacket.Action.START_FALL_FLYING));
-                ci.cancel();
-            }
+            CuriosCompat.FlightMode allowed = CuriosCompat.AllowedFlightModes(player, true);
+            if (!allowed.canElytraFly())
+                return;
+
+            player.startFallFlying();
+            player.connection.send(new ServerboundPlayerCommandPacket(player, ServerboundPlayerCommandPacket.Action.START_FALL_FLYING));
+            ci.cancel();
         }
     }
 }

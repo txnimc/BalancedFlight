@@ -3,6 +3,7 @@ package com.vice.balancedflight.mixins;
 import com.vice.balancedflight.compat.CuriosCompat;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,12 +21,11 @@ public class ElytraUpdateMixin
     {
         LivingEntity player = (LivingEntity) (Object) this;
 
-        if (player.getClass() != ServerPlayer.class)
+        if (!(player instanceof ServerPlayer))
             return;
 
-        if (CuriosCompat.CanFly((ServerPlayer) player))
-        {
+        CuriosCompat.FlightMode allowed = CuriosCompat.AllowedFlightModes((Player) player, true);
+        if (allowed.canElytraFly())
             ci.cancel();
-        }
     }
 }
