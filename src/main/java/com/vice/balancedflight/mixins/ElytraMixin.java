@@ -2,7 +2,7 @@ package com.vice.balancedflight.mixins;
 
 import com.vice.balancedflight.BalancedFlight;
 import com.vice.balancedflight.compat.CuriosCompat;
-import com.vice.balancedflight.config.BalancedFlightConfig;
+import com.vice.balancedflight.config.Config;
 import com.vice.balancedflight.items.FlightRing;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.network.play.ClientPlayNetHandler;
@@ -30,26 +30,15 @@ public class ElytraMixin
     private void tryToStartFallFlying(CallbackInfo ci) {
         ClientPlayerEntity player = (ClientPlayerEntity) (Object) this;
 
-        boolean hasAscended = CuriosCompat.HasBasicRing(player);
-        boolean hasBasic = CuriosCompat.HasAscendedRing(player);
-
-        if (!hasBasic && !hasAscended)
-            return;
-
-        if (hasAscended || CuriosCompat.IsWithinFlightRange(player))
+        if (!player.isOnGround() && !player.isFallFlying() && !player.isInWater() && !player.hasEffect(Effects.LEVITATION))
         {
-            if (!player.isOnGround() && !player.isFallFlying() && !player.isInWater() && !player.hasEffect(Effects.LEVITATION))
-            {
-                if (!BalancedFlightConfig.enableAscendedElytraFlight.get() && !hasAscended)
-                    return;
+            CuriosCompat.FlightMode allowed = CuriosCompat.AllowedFlightModes(player, true);
+            if (!allowed.canElytraFly())
+                return;
 
-                if (!BalancedFlightConfig.enableBasicElytraFlight.get() && !hasBasic)
-                    return;
-
-                player.startFallFlying();
-                player.connection.send(new CEntityActionPacket(player, CEntityActionPacket.Action.START_FALL_FLYING));
-                ci.cancel();
-            }
+            player.startFallFlying();
+            player.connection.send(new CEntityActionPacket(player, CEntityActionPacket.Action.START_FALL_FLYING));
+            ci.cancel();
         }
     }
 }

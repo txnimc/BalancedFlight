@@ -9,7 +9,7 @@ import java.nio.file.Path;
 
 import static net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 
-public class BalancedFlightConfig
+public class Config
 {
     public static ForgeConfigSpec ConfigSpec;
 
@@ -17,14 +17,14 @@ public class BalancedFlightConfig
     public static ConfigValue<Boolean> enableTakeOff;
     public static ConfigValue<Boolean> infiniteRockets;
 
-    public static ConfigValue<Boolean> enableBasicElytraFlight;
-    public static ConfigValue<Boolean> enableAscendedElytraFlight;
+    public static ConfigValue<Boolean> ElytraBasic;
+    public static ConfigValue<Boolean> ElytraAscended;
 
     public static ConfigValue<Boolean> disableFallDamageWithRings;
     public static ConfigValue<Boolean> disableElytraDamageWithRings;
 
-    public static ConfigValue<Boolean> basicRingGivesCreativeFlight;
-    public static ConfigValue<Boolean> ascendedRingGivesCreativeFlight;
+    public static ConfigValue<Boolean> CreativeBasic;
+    public static ConfigValue<Boolean> CreativeAscended;
 
     public static ConfigValue<Double> anchorDistanceMultiplier;
 
@@ -33,10 +33,11 @@ public class BalancedFlightConfig
         ConfigBuilder builder = new ConfigBuilder("Balanced Flight Settings");
 
         builder.Block("Flight Options", b -> {
-            basicRingGivesCreativeFlight = b.define("Basic Ring Gives Creative Flight", false);
-            ascendedRingGivesCreativeFlight = b.define("Ascended Ring Gives Creative Flight", false);
-            enableBasicElytraFlight = b.define("Basic Flight Ring Also Works As Elytra", true);
-            enableAscendedElytraFlight = b.define("Ascended Ring Also Works As Elytra", true);
+            CreativeAscended = b.define("Ascended Ring Gives Unlimited Creative Flight (will fall back to Basic tier inside range)", true);
+            ElytraAscended = b.define("Ascended Ring Also Works As Elytra", true);
+
+            CreativeBasic = b.define("Basic Ring Gives Creative Flight", true);
+            ElytraBasic = b.define("Basic Flight Ring Also Works As Elytra", false);
         });
 
         builder.Block("Balancing Config", b -> {

@@ -1,7 +1,7 @@
 package com.vice.balancedflight;
 
 import com.vice.balancedflight.compat.CuriosCompat;
-import com.vice.balancedflight.config.BalancedFlightConfig;
+import com.vice.balancedflight.config.Config;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -15,21 +15,20 @@ public class ForgeHooks
 {
     @SubscribeEvent
     public static void onLivingAttack(LivingAttackEvent event) {
-        if (Objects.equals(event.getSource().msgId, "flyIntoWall") && BalancedFlightConfig.disableElytraDamageWithRings.get()) {
+        if (Objects.equals(event.getSource().msgId, "flyIntoWall") && Config.disableElytraDamageWithRings.get()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
                 PlayerEntity player = (PlayerEntity) event.getEntityLiving();
-                if (CuriosCompat.HasAnyRing(player))
-                    event.setCanceled(true);
+                event.setCanceled(true);
             }
         }
     }
 
     @SubscribeEvent
     public static void onLivingHurt(LivingHurtEvent event) {
-        if (Objects.equals(event.getSource().msgId, "fall") && BalancedFlightConfig.disableFallDamageWithRings.get()) {
+        if (Objects.equals(event.getSource().msgId, "fall") && Config.disableFallDamageWithRings.get()) {
             if (event.getEntityLiving() instanceof PlayerEntity) {
                 PlayerEntity player = (PlayerEntity) event.getEntityLiving();
-                if (CuriosCompat.HasAnyRing(player))
+                if (CuriosCompat.AllowedFlightModes(player, false) != CuriosCompat.FlightMode.None)
                     event.setCanceled(true);
             }
         }

@@ -1,27 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "UCU",
-    "DKD",
-    "NGN"
+    "SGS",
+    "CNC",
+    "XVX"
   ],
   "key": {
-    "D": {
-      "item": "minecraft:gold_block"
-    },
     "G": {
-      "item": "balancedflight:basic_flight_anchor"
-    },
-    "K": {
-      "item": "minecraft:feather"
-    },
-    "U": {
-      "item": "minecraft:polished_blackstone_bricks"
-    },
-    "C": {
       "item": "minecraft:diamond_block"
     },
+    "V": {
+      "item": "balancedflight:basic_flight_anchor"
+    },
     "N": {
+      "item": "minecraft:feather"
+    },
+    "C": {
+      "item": "minecraft:gold_block"
+    },
+    "S": {
+      "item": "minecraft:polished_blackstone_bricks"
+    },
+    "X": {
       "item": "balancedflight:ascended_blackstone"
     }
   },

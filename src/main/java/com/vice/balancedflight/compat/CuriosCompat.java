@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.vice.balancedflight.blocks.FlightAnchorEntity;
-import com.vice.balancedflight.config.BalancedFlightConfig;
+import com.vice.balancedflight.config.Config;
 import com.vice.balancedflight.items.FlightRing;
 import com.vice.balancedflight.mixins.ConnectionAccessor;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -106,78 +106,128 @@ public class CuriosCompat implements ICurio
             return;
 
         PlayerEntity player = ((PlayerEntity) livingEntity);
+        FlightMode allowed = AllowedFlightModes(player, false);
 
-        // allow creative flight anywhere
-        if (IsWithinFlightRange(player))
-        {
-            if (parent.tier == FlightRing.FlightRingType.BASIC && BalancedFlightConfig.basicRingGivesCreativeFlight.get())
-                startFlying(player);
-            else if (parent.tier == FlightRing.FlightRingType.ASCENDED &&
-                    (BalancedFlightConfig.ascendedRingGivesCreativeFlight.get() || BalancedFlightConfig.basicRingGivesCreativeFlight.get()))
-                startFlying(player);
-
-            return;
+        if (allowed == FlightMode.None || allowed == FlightMode.Elytra) {
+            if (!player.isCreative() && player.abilities.mayfly)
+            {
+                stopFlying(player);
+                // handle falling out of sky
+                player.addEffect(new EffectInstance(Effects.SLOW_FALLING, 200));
+            }
         }
-
-        //allow unlimited creative flight if enabled
-        if (parent.tier == FlightRing.FlightRingType.ASCENDED && BalancedFlightConfig.ascendedRingGivesCreativeFlight.get())
-        {
-            startFlying(player);
-            return;
-        }
-
-        // turn off flying if out of range.
-        if (!player.isCreative() && player.abilities.mayfly)
-        {
-            stopFlying(player);
-            // handle falling out of sky
-            player.addEffect(new EffectInstance(Effects.SLOW_FALLING, 200));
+        else {
+            if (!player.abilities.mayfly) {
+                startFlying(player);
+                // handle removing effect cleanly
+                if (player.hasEffect(Effects.SLOW_FALLING))
+                    player.removeEffect(Effects.SLOW_FALLING);
+            }
         }
     }
 
-    public static boolean HasRingAllowingElytraFlight(PlayerEntity player) {
+    public static FlightMode AllowedFlightModes(PlayerEntity player, boolean onlyCareAboutElytra)
+    {
         boolean hasAscended = HasAscendedRing(player);
         boolean hasBasic = HasBasicRing(player);
 
+        // return none if not wearing any rings
         if (!hasAscended && !hasBasic)
-            return false;
+            return FlightMode.None;
 
-        if (hasAscended && !BalancedFlightConfig.enableAscendedElytraFlight.get())
-            return false;
+        boolean CanElytraFly;
+        boolean CanCreativeFly;
 
-        if (hasBasic && !BalancedFlightConfig.enableBasicElytraFlight.get())
-            return false;
+        if (hasAscended)
+        {
+            // fetch from config and look up allowed modes from truth table
+            CanElytraFly = Config.ElytraAscended.get();
+            CanCreativeFly = Config.CreativeAscended.get();
+            FlightMode allowedModes = FlightMode.fromBools(CanElytraFly, CanCreativeFly);
 
-        return true;
+            // if it's just creative, both, or neither, just return
+            if (allowedModes != FlightMode.Elytra)
+                return allowedModes;
+
+            // if Elytra doesn't give unlimited creative flight,
+            // check if Basic tier is allowed to fly.
+            if (!CanCreativeFly && Config.CreativeBasic.get())
+            {
+                if (IsWithinFlightRange(player))
+                    return FlightMode.fromBools(CanElytraFly, true);
+            }
+
+            return allowedModes;
+        }
+
+        // only has basic ring at this point
+        CanElytraFly = Config.ElytraBasic.get();
+        CanCreativeFly = Config.CreativeBasic.get();
+
+        if (onlyCareAboutElytra && !CanElytraFly)
+            return FlightMode.None;
+
+        if (IsWithinFlightRange(player))
+            return FlightMode.fromBools(CanElytraFly, CanCreativeFly);
+        else
+            return FlightMode.None;
     }
 
 
-    public static boolean HasAnyRing(PlayerEntity player) {
+
+    public enum FlightMode {
+        None,
+        Elytra,
+        Creative,
+        Both;
+
+        public static FlightMode fromBools(boolean ElytraAllowed, boolean CreativeAllowed) {
+            if (ElytraAllowed && CreativeAllowed)
+                return Both;
+
+            if (ElytraAllowed)
+                return Elytra;
+
+            if (CreativeAllowed)
+                return Creative;
+
+            return None;
+        }
+
+        public boolean canElytraFly() {
+            return this == Elytra || this == Both;
+        }
+
+        public boolean canCreativeFly() {
+            return this == Creative || this == Both;
+        }
+    }
+
+    private static boolean HasAnyRing(PlayerEntity player) {
         return HasBasicRing(player) || HasAscendedRing(player);
     }
 
-    public static boolean HasBasicRing(PlayerEntity player) {
+    private static boolean HasBasicRing(PlayerEntity player) {
         return CuriosCompat.isRingInCuriosSlot(FlightRing.BASIC.get(), player);
     }
 
-    public static boolean HasAscendedRing(PlayerEntity player) {
+    private static boolean HasAscendedRing(PlayerEntity player) {
         return CuriosCompat.isRingInCuriosSlot(FlightRing.ASCENDED.get(), player);
     }
 
-
-    public static boolean IsWithinFlightRange(PlayerEntity player)
+    private static boolean IsWithinFlightRange(PlayerEntity player)
     {
         if (player.level.dimension() != World.OVERWORLD)
             return false;
 
-        double anchorDistanceMultiplier = BalancedFlightConfig.anchorDistanceMultiplier.get();
+        double anchorDistanceMultiplier = Config.anchorDistanceMultiplier.get();
 
         return FlightAnchorEntity.ActiveAnchors
                 .stream()
                 .anyMatch(anchor -> distSqr(anchor.position, player.position()) < (anchorDistanceMultiplier * anchor.tier.EffectDistance) * (anchorDistanceMultiplier * anchor.tier.EffectDistance));
     }
 
-    public static double distSqr(Vector3i vec, Vector3d other) {
+    private static double distSqr(Vector3i vec, Vector3d other) {
         double d1 = (double)vec.getX() - other.x;
         double d3 = (double)vec.getZ() - other.z;
         return d1 * d1 + d3 * d3;

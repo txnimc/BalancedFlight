@@ -2,9 +2,8 @@ package com.vice.balancedflight;
 
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.providers.ProviderType;
-import com.tterrag.registrate.util.NonNullLazyValue;
-import com.vice.balancedflight.compat.ExternalMods;
-import com.vice.balancedflight.config.BalancedFlightConfig;
+import com.tterrag.registrate.util.NonNullLazyValue; 
+import com.vice.balancedflight.config.Config;
 import com.vice.balancedflight.data.BalancedFlightSaveData;
 import com.vice.balancedflight.proxy.ClientProxy;
 import com.vice.balancedflight.proxy.IProxy;
@@ -50,8 +49,7 @@ public class BalancedFlight {
     }
 
     public BalancedFlight() {
-        BalancedFlightConfig.init();
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        Config.init();
         MinecraftForge.EVENT_BUS.register(this);
 
         Registry.init();

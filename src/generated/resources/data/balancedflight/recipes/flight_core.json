@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ZMZ",
-    "MRM",
-    "ZMZ"
+    "LRL",
+    "RZR",
+    "LRL"
   ],
   "key": {
-    "M": {
+    "R": {
       "item": "minecraft:gold_block"
     },
-    "R": {
-      "item": "minecraft:nether_star"
+    "L": {
+      "item": "balancedflight:ascended_blackstone"
     },
     "Z": {
-      "item": "balancedflight:ascended_blackstone"
+      "item": "minecraft:netherite_ingot"
     }
   },
   "result": {

@@ -1,24 +1,24 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ASA",
-    "IUI",
-    "AQA"
+    "QGQ",
+    "XAX",
+    "QWQ"
   ],
   "key": {
-    "Q": {
+    "W": {
       "item": "balancedflight:gilded_flight_anchor"
     },
-    "U": {
-      "item": "minecraft:feather"
-    },
-    "S": {
-      "item": "minecraft:emerald_block"
-    },
-    "I": {
+    "X": {
       "item": "minecraft:diamond_block"
     },
     "A": {
+      "item": "minecraft:feather"
+    },
+    "G": {
+      "item": "minecraft:emerald_block"
+    },
+    "Q": {
       "item": "balancedflight:ascended_blackstone"
     }
   },

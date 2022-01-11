@@ -1,21 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "HZH",
-    "IVI",
-    "HHH"
+    "RFR",
+    "WCW",
+    "RRR"
   ],
   "key": {
-    "Z": {
-      "item": "minecraft:gold_block"
-    },
-    "V": {
-      "item": "minecraft:feather"
-    },
-    "I": {
+    "W": {
       "item": "minecraft:iron_block"
     },
-    "H": {
+    "C": {
+      "item": "minecraft:feather"
+    },
+    "F": {
+      "item": "minecraft:gold_block"
+    },
+    "R": {
       "item": "minecraft:polished_blackstone_bricks"
     }
   },

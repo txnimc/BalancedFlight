@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "KIK",
-    "IBI",
-    "KIK"
+    "GFG",
+    "FNF",
+    "GFG"
   ],
   "key": {
-    "I": {
-      "item": "minecraft:gold_block"
-    },
-    "B": {
+    "N": {
       "item": "minecraft:diamond"
     },
-    "K": {
-      "item": "minecraft:polished_blackstone"
+    "F": {
+      "item": "minecraft:gold_block"
+    },
+    "G": {
+      "item": "minecraft:polished_blackstone_bricks"
     }
   },
   "result": {

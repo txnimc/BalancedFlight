@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "PGP",
-    "GZG",
-    "PGP"
+    "MJM",
+    "JRJ",
+    "MJM"
   ],
   "key": {
-    "G": {
-      "item": "minecraft:quartz_block"
-    },
-    "Z": {
+    "R": {
       "item": "minecraft:feather"
     },
-    "P": {
+    "M": {
       "item": "minecraft:iron_ingot"
+    },
+    "J": {
+      "item": "minecraft:quartz_block"
     }
   },
   "result": {

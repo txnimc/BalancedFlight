@@ -2,7 +2,6 @@ package com.vice.balancedflight.mixins;
 
 import com.vice.balancedflight.BalancedFlight;
 import com.vice.balancedflight.compat.CuriosCompat;
-import com.vice.balancedflight.config.BalancedFlightConfig;
 import com.vice.balancedflight.items.FlightRing;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.LivingEntity;
@@ -30,15 +29,8 @@ public class ElytraUpdateMixin
         if (!(player instanceof ServerPlayerEntity))
             return;
 
-        boolean hasAscended = CuriosCompat.HasBasicRing((PlayerEntity) player);
-        boolean hasBasic = CuriosCompat.HasAscendedRing((PlayerEntity) player);
-
-        if (!hasBasic && !hasAscended)
-            return;
-
-        if (hasAscended || CuriosCompat.IsWithinFlightRange((ServerPlayerEntity) player))
-        {
+        CuriosCompat.FlightMode allowed = CuriosCompat.AllowedFlightModes((PlayerEntity) player, true);
+        if (allowed.canElytraFly())
             ci.cancel();
-        }
     }
 }

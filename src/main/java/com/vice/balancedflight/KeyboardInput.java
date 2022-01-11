@@ -1,7 +1,7 @@
 package com.vice.balancedflight;
 
 import com.vice.balancedflight.compat.CuriosCompat;
-import com.vice.balancedflight.config.BalancedFlightConfig;
+import com.vice.balancedflight.config.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.settings.KeyBinding;
@@ -28,11 +28,15 @@ public class KeyboardInput {
 
     @SubscribeEvent
     public static void onKeyboardInput(InputEvent.KeyInputEvent event) {
-        if (TAKE_OFF_KEY.isDown() && BalancedFlightConfig.enableTakeOff.get()) {
+        if (TAKE_OFF_KEY.isDown() && Config.enableTakeOff.get()) {
             assert Minecraft.getInstance().player != null;
             ClientPlayerEntity player = Minecraft.getInstance().player;
 
-            if (player.isOnGround() && !player.isFallFlying() && CuriosCompat.HasAnyRing(player) && CuriosCompat.IsWithinFlightRange(player)) {
+            if (player.isOnGround() && !player.isFallFlying()) {
+
+                if (!CuriosCompat.AllowedFlightModes(player, true).canElytraFly())
+                    return;
+
                 Vector3d vector3d = player.getLookAngle();
                 double d0 = 1.5D;
                 double d1 = 0.1D;
