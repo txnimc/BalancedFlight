@@ -1,0 +1,18 @@
+{
+  "block.balancedflight.ascended_blackstone": "Pedra Negra Acendida",
+  "block.balancedflight.ascended_flight_anchor": "Âncora de Voo Acendida",
+  "block.balancedflight.basic_flight_anchor": "Âncora de Voo Básica",
+  "block.balancedflight.gilded_flight_anchor": "Âncora de Voo Dourada",
+  "curios.identifier.flight_ring": "Anel de Voo",
+  "item.balancedflight.ascended_flight_ring": "Anel de Voo Acendido",
+  "item.balancedflight.basic_flight_ring": "Anel de Voo Básico",
+  "item.balancedflight.flight_core": "Núcleo de Voo",
+  "itemGroup.balancedflight": "Voo Equilibrado",
+  "tooltip.balancedflight.ascended_blackstone": "Criar item para Âncoras de Voo e Núcleos de Voo.",
+  "tooltip.balancedflight.ascended_flight_anchor": "Permite voar em um raio de 100 blocos. Só funciona no overworld.",
+  "tooltip.balancedflight.ascended_flight_ring": "Um anel dourado incrivelmente denso e, no entanto, permite voar para qualquer lugar.",
+  "tooltip.balancedflight.basic_flight_anchor": "Permite voar em um raio de 25 blocos. Só funciona no overworld.",
+  "tooltip.balancedflight.basic_flight_ring": "Permite o voo em torno de âncoras de voo. Só funciona no overworld.",
+  "tooltip.balancedflight.flight_core": "Criando item para o Anel de Voo Acendido.",
+  "tooltip.balancedflight.gilded_flight_anchor": "Permite voar em um raio de 50 blocos. Só funciona no overworld."
+}
