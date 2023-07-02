@@ -1,4 +1,4 @@
-package com.vice.balancedflight.compat;
+package com.vice.balancedflight.blocks.compat;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -229,8 +229,9 @@ public class CuriosCompat implements ICurio
         double anchorDistanceMultiplier = Config.anchorDistanceMultiplier.get();
 
         return FlightAnchorEntity.ActiveAnchors
+                .entrySet()
                 .stream()
-                .anyMatch(anchor -> distSqr(anchor.position, player.position()) < (anchorDistanceMultiplier * anchor.tier.EffectDistance) * (anchorDistanceMultiplier * anchor.tier.EffectDistance));
+                .anyMatch(anchor -> distSqr(anchor.getKey(), player.position()) < (anchorDistanceMultiplier * anchor.getValue().EffectDistance) * (anchorDistanceMultiplier * anchor.getValue().EffectDistance));
     }
 
     private static double distSqr(Vec3i vec, Vec3 other) {

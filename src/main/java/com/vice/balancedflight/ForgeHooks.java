@@ -1,6 +1,6 @@
 package com.vice.balancedflight;
 
-import com.vice.balancedflight.compat.CuriosCompat;
+import com.vice.balancedflight.blocks.compat.CuriosCompat;
 import com.vice.balancedflight.config.Config;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -16,8 +16,8 @@ public class ForgeHooks
     @SubscribeEvent
     public static void onLivingAttack(LivingAttackEvent event) {
         if (Objects.equals(event.getSource().msgId, "flyIntoWall") && Config.disableElytraDamageWithRings.get()) {
-            if (event.getEntityLiving() instanceof Player) {
-                Player player = (Player) event.getEntityLiving();
+            if (event.getEntity() instanceof Player) {
+                Player player = (Player) event.getEntity();
                 if (CuriosCompat.AllowedFlightModes(player, true) != CuriosCompat.FlightMode.None)
                     event.setCanceled(true);
             }
@@ -27,8 +27,8 @@ public class ForgeHooks
     @SubscribeEvent
     public static void onLivingHurt(LivingHurtEvent event) {
         if (Objects.equals(event.getSource().msgId, "fall") && Config.disableFallDamageWithRings.get()) {
-            if (event.getEntityLiving() instanceof Player) {
-                Player player = (Player) event.getEntityLiving();
+            if (event.getEntity() instanceof Player) {
+                Player player = (Player) event.getEntity();
                 if (CuriosCompat.AllowedFlightModes(player, false) != CuriosCompat.FlightMode.None)
                     event.setCanceled(true);
             }

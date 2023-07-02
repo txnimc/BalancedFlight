@@ -1,19 +1,17 @@
 package com.vice.balancedflight.items;
 
-import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.ItemBuilder;
-import com.tterrag.registrate.util.entry.LazyRegistryEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.vice.balancedflight.BalancedFlight;
+import com.vice.balancedflight.BalancedFlightRegistrate;
 import com.vice.balancedflight.Registry;
-import com.vice.balancedflight.compat.CuriosCompat;
-import com.vice.balancedflight.compat.ExternalMods;
+import com.vice.balancedflight.blocks.compat.CuriosCompat;
+import com.vice.balancedflight.blocks.compat.ExternalMods;
 import com.vice.balancedflight.util.ModItemTab;
 import com.vice.balancedflight.util.RecipeHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component; 
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -26,7 +24,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.registries.ObjectHolder;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -92,7 +89,7 @@ public class FlightRing extends Item {
             .register();
 
 
-    public static final ItemBuilder<FlightRing, Registrate> RegCommon(FlightRingType ringtier)
+    public static final ItemBuilder<FlightRing, BalancedFlightRegistrate> RegCommon(FlightRingType ringtier)
     {
         return BalancedFlight.registrate()
                 .item(ringtier.getResourceName(), p -> new FlightRing(p, ringtier))
@@ -120,13 +117,13 @@ public class FlightRing extends Item {
 
         if (((FlightRing)stack.getItem()).tier == FlightRingType.ASCENDED)
         {
-            tooltip.add(new TextComponent("An incredibly dense golden ring. Despite its weight, it allows you to fly anywhere (Angel Ring).").withStyle(ChatFormatting.GOLD));
-            tooltip.add(new TextComponent("Allows both creative and enhanced Elytra flight.").withStyle(ChatFormatting.WHITE));
+            tooltip.add(Component.literal("An incredibly dense golden ring. Despite its weight, it allows you to fly anywhere (Angel Ring).").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.literal("Allows both creative and enhanced Elytra flight.").withStyle(ChatFormatting.WHITE));
         }
         else {
-            tooltip.add(new TextComponent("Cheap ring that allows flight around flight anchors (Angel Ring).").withStyle(ChatFormatting.WHITE));
-            tooltip.add(new TextComponent("Allows both creative and enhanced Elytra flight.").withStyle(ChatFormatting.WHITE));
-            tooltip.add(new TextComponent("Only works in the overworld.").withStyle(ChatFormatting.RED));
+            tooltip.add(Component.literal("Cheap ring that allows flight around flight anchors (Angel Ring).").withStyle(ChatFormatting.WHITE));
+            tooltip.add(Component.literal("Allows both creative and enhanced Elytra flight.").withStyle(ChatFormatting.WHITE));
+            tooltip.add(Component.literal("Only works in the overworld.").withStyle(ChatFormatting.RED));
         }
     }
 

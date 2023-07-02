@@ -5,7 +5,7 @@ import com.tterrag.registrate.Registrate;
 public class Lang
 {
     public static void init() {
-        Registrate registrate = BalancedFlight.registrate();
+        BalancedFlightRegistrate registrate = BalancedFlight.registrate();
 
         registrate.addLang("tooltip", Registry.BASIC_FLIGHT_ANCHOR.getId(), "Allows flight in a 25 block radius. Only works in the overworld.");
         registrate.addLang("tooltip", Registry.GILDED_FLIGHT_ANCHOR.getId(), "Allows flight in a 50 block radius. Only works in the overworld.");

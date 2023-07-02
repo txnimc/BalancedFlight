@@ -1,7 +1,7 @@
 package com.vice.balancedflight;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.vice.balancedflight.compat.CuriosCompat;
+import com.vice.balancedflight.blocks.compat.CuriosCompat;
 import com.vice.balancedflight.config.Config;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -27,7 +27,7 @@ public class KeyboardInput {
             "key.category." + BalancedFlight.MODID);
 
     @SubscribeEvent
-    public static void onKeyboardInput(InputEvent.KeyInputEvent event) {
+    public static void onKeyboardInput(InputEvent.Key event) {
         if (TAKE_OFF_KEY.isDown() && Config.enableTakeOff.get()) {
             assert Minecraft.getInstance().player != null;
             LocalPlayer player = Minecraft.getInstance().player;

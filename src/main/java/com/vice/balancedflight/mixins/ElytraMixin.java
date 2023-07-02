@@ -1,11 +1,10 @@
 package com.vice.balancedflight.mixins;
 
 
-import com.vice.balancedflight.compat.CuriosCompat;
+import com.vice.balancedflight.blocks.compat.CuriosCompat;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.protocol.game.ServerboundPlayerCommandPacket;
 import net.minecraft.world.effect.MobEffects;
-import com.vice.balancedflight.config.Config;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

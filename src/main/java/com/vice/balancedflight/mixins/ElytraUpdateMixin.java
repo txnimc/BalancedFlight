@@ -1,6 +1,6 @@
 package com.vice.balancedflight.mixins;
 
-import com.vice.balancedflight.compat.CuriosCompat;
+import com.vice.balancedflight.blocks.compat.CuriosCompat;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

@@ -1,4 +1,4 @@
-package com.vice.balancedflight.compat;
+package com.vice.balancedflight.blocks.compat;
 
 import net.minecraftforge.fml.ModList;
 

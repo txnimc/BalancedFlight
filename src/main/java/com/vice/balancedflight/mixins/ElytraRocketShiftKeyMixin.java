@@ -1,7 +1,7 @@
 package com.vice.balancedflight.mixins;
 
 
-import com.vice.balancedflight.compat.CuriosCompat;
+import com.vice.balancedflight.blocks.compat.CuriosCompat;
 import com.vice.balancedflight.config.Config;
 import com.vice.balancedflight.network.CustomNetworkMessage;
 import net.minecraft.client.player.LocalPlayer;
