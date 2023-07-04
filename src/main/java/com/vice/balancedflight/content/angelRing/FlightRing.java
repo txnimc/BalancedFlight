@@ -1,18 +1,14 @@
 package com.vice.balancedflight.content.angelRing;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
-import com.vice.balancedflight.AllItems;
 import com.vice.balancedflight.BalancedFlight;
 import com.vice.balancedflight.foundation.compat.AscendedRingCurio;
 import com.vice.balancedflight.foundation.compat.ExternalMods;
-import com.vice.balancedflight.foundation.util.ModItemTab;
-import com.vice.balancedflight.foundation.util.RecipeHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -32,16 +28,8 @@ public class FlightRing extends Item {
 
     public static final RegistryEntry<? extends Item> ASCENDED = BalancedFlight.registrate()
             .item("ascended_flight_ring", FlightRing::new)
-            .initialProperties(() -> new Item.Properties().stacksTo(1).tab(ModItemTab.tab))
-            .recipe((gen, prov) ->
-                RecipeHelper.Shaped(prov, gen.get())
-                        .Row(AllItems.FLIGHT_CORE.get(), Items.GOLD_BLOCK, AllItems.FLIGHT_CORE.get())
-                        .Row(Items.GOLD_BLOCK, Items.ELYTRA, Items.GOLD_BLOCK)
-                        .Row(AllItems.FLIGHT_CORE.get(), Items.GOLD_BLOCK, AllItems.FLIGHT_CORE.get())
-                        .UnlockedBy(Items.FEATHER)
-                        .Save())
+            .initialProperties(() -> new Item.Properties().stacksTo(1).tab(BalancedFlight.CREATIVE_TAB))
             .register();
-
 
     @SubscribeEvent
     public static void sendImc(InterModEnqueueEvent event) {

@@ -1,12 +1,11 @@
 package com.vice.balancedflight.content.flightAnchor.entity;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.vice.balancedflight.BalancedFlight;
-import com.vice.balancedflight.content.flightAnchor.FlightAnchor;
+import com.vice.balancedflight.content.flightAnchor.FlightAnchorBlock;
 import com.vice.balancedflight.AllGeckoRenderers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
@@ -49,10 +48,10 @@ public class FlightAnchorEntity extends KineticBlockEntity implements IAnimatabl
         super(type, pos, state);
     }
 
-    public static final BlockEntityEntry<FlightAnchorEntity> REGISTRATION = BalancedFlight.createRegistrate()
+    public static final BlockEntityEntry<FlightAnchorEntity> REGISTRATION = BalancedFlight.registrate()
             .blockEntity("flight_anchor", FlightAnchorEntity::new)
             .instance(() -> FlightAnchorKineticInstance::new)
-            .validBlock(FlightAnchor.REGISTRY_ENTRY)
+            .validBlock(FlightAnchorBlock.REGISTRY_ENTRY)
             .renderer(() -> AllGeckoRenderers.FlightAnchorGeckoRenderer.TileRenderer::apply)
             .register();
 

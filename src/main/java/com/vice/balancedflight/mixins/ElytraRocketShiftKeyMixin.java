@@ -2,8 +2,7 @@ package com.vice.balancedflight.mixins;
 
 
 import com.vice.balancedflight.content.flightAnchor.FlightController;
-import com.vice.balancedflight.foundation.compat.AscendedRingCurio;
-import com.vice.balancedflight.foundation.config.Config;
+import com.vice.balancedflight.foundation.config.BalancedFlightConfig;
 import com.vice.balancedflight.foundation.network.CustomNetworkMessage;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.level.Level;
@@ -24,7 +23,7 @@ public class ElytraRocketShiftKeyMixin
     {
         LocalPlayer player = (LocalPlayer) (Object) this;
 
-        if (player.isFallFlying() && Config.infiniteRockets.get())
+        if (player.isFallFlying() && BalancedFlightConfig.infiniteRockets.get())
         {
             FlightController.FlightMode allowed = FlightController.AllowedFlightModes(player, true);
             if (!allowed.canElytraFly())

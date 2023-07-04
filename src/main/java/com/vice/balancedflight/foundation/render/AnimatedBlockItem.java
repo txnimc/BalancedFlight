@@ -2,7 +2,7 @@ package com.vice.balancedflight.foundation.render;
 
 
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
-import com.vice.balancedflight.foundation.util.ModItemTab;
+import com.vice.balancedflight.BalancedFlight;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -27,7 +27,7 @@ public class AnimatedBlockItem<I extends Item & IAnimatable> extends AssemblyOpe
     private Supplier<? extends GeoItemRenderer<?>> renderer;
 
     public AnimatedBlockItem(Block pBlock, Properties properties, Supplier<? extends GeoItemRenderer<?>> renderer) {
-        super(pBlock, properties.tab(ModItemTab.tab));
+        super(pBlock, properties.tab(BalancedFlight.CREATIVE_TAB));
         this.renderer = renderer;
     }
 

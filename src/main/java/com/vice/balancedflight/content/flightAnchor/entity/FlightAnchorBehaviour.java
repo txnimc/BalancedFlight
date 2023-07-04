@@ -41,6 +41,7 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
         if (!active)
         {
             FlightAnchorEntity.ActiveAnchors.remove(getPos());
+            playSound(getWorld(), getPos(), SoundEvents.BEACON_DEACTIVATE);
             return;
         }
 
@@ -48,6 +49,7 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
             return;
 
         FlightAnchorEntity.ActiveAnchors.put(getPos(), (FlightAnchorEntity) blockEntity);
+        playSound(getWorld(), getPos(), SoundEvents.BEACON_ACTIVATE);
     }
 
     @Override
@@ -57,7 +59,9 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
     }
 
     @Override
-    public void unload() { setActive(false); }
+    public void unload() {
+        setActive(false);
+    }
 
     @Override
     public void tick()
@@ -71,11 +75,9 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
 
         if (flightAnchor.isActive && !wasActive) {
             setActive(true);
-            playSound(getWorld(), getPos(), SoundEvents.BEACON_ACTIVATE);
         }
         else if (!flightAnchor.isActive && wasActive) {
             setActive(false);
-            playSound(getWorld(), getPos(), SoundEvents.BEACON_DEACTIVATE);
             flightAnchor.beamSections.clear();
             flightAnchor.checkingBeamSections.clear();
         }
@@ -108,7 +110,6 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
 
         for(int i1 = 0; i1 < 10 && blockpos.getY() <= l; ++i1) {
             BlockState blockstate = level.getBlockState(blockpos);
-            Block block = blockstate.getBlock();
             float[] afloat = blockstate.getBeaconColorMultiplier(level, blockpos, blockPos);
             if (afloat != null) {
                 if (entity.checkingBeamSections.size() <= 1) {
@@ -136,25 +137,15 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
             ++entity.lastCheckY;
         }
 
-
+        if (level.getGameTime() % 80L == 0L) {
+            if (!entity.beamSections.isEmpty()) {
+                playSound(level, blockPos, SoundEvents.BEACON_AMBIENT);
+            }
+        }
 
         if (entity.lastCheckY >= l) {
             entity.lastCheckY = level.getMinBuildHeight() - 1;
             entity.beamSections = entity.checkingBeamSections;
-
-//            if (!level.isClientSide) {
-//                if (!flag) {
-//                    playSound(level, blockPos, SoundEvents.BEACON_ACTIVATE);
-//
-//                    for(ServerPlayer serverplayer : level.getEntitiesOfClass(ServerPlayer.class, (new AABB((double)i, (double)j, (double)k, (double)i, (double)(j - 4), (double)k)).inflate(10.0D, 5.0D, 10.0D))) {
-//                        CriteriaTriggers.CONSTRUCT_BEACON.trigger(serverplayer, entity.levels);
-//                    }
-//                }
-//                else
-//                {
-//                    playSound(level, blockPos, SoundEvents.BEACON_DEACTIVATE);
-//                }
-//            }
         }
     }
 

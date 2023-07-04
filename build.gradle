@@ -141,6 +141,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:rubidium-574856:4568727")
     runtimeOnly fg.deobf("curse.maven:oculus-581495:4578731")
     runtimeOnly fg.deobf("curse.maven:jei-238222:4615177")
+    runtimeOnly fg.deobf("curse.maven:itemzoom-261725:3903160")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
 }

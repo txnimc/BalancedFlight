@@ -2,8 +2,7 @@ package com.vice.balancedflight.foundation.events;
 
 import com.vice.balancedflight.AllKeybinds;
 import com.vice.balancedflight.content.flightAnchor.FlightController;
-import com.vice.balancedflight.foundation.compat.AscendedRingCurio;
-import com.vice.balancedflight.foundation.config.Config;
+import com.vice.balancedflight.foundation.config.BalancedFlightConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.protocol.game.ServerboundPlayerCommandPacket;
@@ -18,7 +17,7 @@ public class InputEvents {
 
     @SubscribeEvent
     public static void onKeyboardInput(InputEvent.Key event) {
-        if (AllKeybinds.TAKE_OFF_KEY.isDown() && Config.enableTakeOff.get()) {
+        if (AllKeybinds.TAKE_OFF_KEY.isDown() && BalancedFlightConfig.enableTakeOff.get()) {
             assert Minecraft.getInstance().player != null;
             LocalPlayer player = Minecraft.getInstance().player;
 

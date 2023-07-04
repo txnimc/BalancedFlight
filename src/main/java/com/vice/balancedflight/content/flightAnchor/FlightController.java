@@ -2,7 +2,7 @@ package com.vice.balancedflight.content.flightAnchor;
 
 import com.vice.balancedflight.content.flightAnchor.entity.FlightAnchorEntity;
 import com.vice.balancedflight.foundation.compat.AscendedRingCurio;
-import com.vice.balancedflight.foundation.config.Config;
+import com.vice.balancedflight.foundation.config.BalancedFlightConfig;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -62,8 +62,8 @@ public class FlightController
         if (hasAscended)
         {
             // fetch from config and look up allowed modes from truth table
-            CanElytraFly = Config.ElytraAscended.get();
-            CanCreativeFly = Config.CreativeAscended.get();
+            CanElytraFly = BalancedFlightConfig.ElytraAscended.get();
+            CanCreativeFly = BalancedFlightConfig.CreativeAscended.get();
             FlightMode allowedModes = FlightMode.fromBools(CanElytraFly, CanCreativeFly);
 
             // if it's just creative, both, or neither, just return
@@ -72,7 +72,7 @@ public class FlightController
 
             // if Elytra doesn't give unlimited creative flight,
             // check if Basic tier is allowed to fly.
-            if (!CanCreativeFly && Config.CreativeBasic.get())
+            if (!CanCreativeFly && BalancedFlightConfig.CreativeAnchor.get())
             {
                 if (IsWithinFlightRange(player))
                     return FlightMode.fromBools(CanElytraFly, true);
@@ -82,8 +82,8 @@ public class FlightController
         }
 
         // only has basic ring at this point
-        CanElytraFly = Config.ElytraBasic.get();
-        CanCreativeFly = Config.CreativeBasic.get();
+        CanElytraFly = BalancedFlightConfig.ElytraAnchor.get();
+        CanCreativeFly = BalancedFlightConfig.CreativeAnchor.get();
 
         if (onlyCareAboutElytra && !CanElytraFly)
             return FlightMode.None;
@@ -99,7 +99,7 @@ public class FlightController
         if (player.level.dimension() != Level.OVERWORLD)
             return false;
 
-        double anchorDistanceMultiplier = Config.anchorDistanceMultiplier.get();
+        double anchorDistanceMultiplier = BalancedFlightConfig.anchorDistanceMultiplier.get();
 
         return FlightAnchorEntity.ActiveAnchors
                 .entrySet()

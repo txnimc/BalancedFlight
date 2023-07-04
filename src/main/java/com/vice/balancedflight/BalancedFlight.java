@@ -1,12 +1,16 @@
 package com.vice.balancedflight;
 
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import com.tterrag.registrate.providers.ProviderType;
-import com.vice.balancedflight.foundation.config.Config;
-import com.vice.balancedflight.foundation.util.ModItemTab;
+import com.vice.balancedflight.foundation.config.BalancedFlightConfig;
+import com.vice.balancedflight.foundation.data.recipe.BalancedFlightRecipeGen;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -15,28 +19,30 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 @Mod("balancedflight")
 public class BalancedFlight {
     public static final String MODID = "balancedflight";
     public static final Logger LOGGER = LogManager.getLogger();
 
-    //private static final BalancedFlightRegistrate REGISTRATE = BalancedFlightRegistrate.create(BalancedFlight.MODID);
-    private static final com.simibubi.create.foundation.data.CreateRegistrate CREATE_REGISTRATE = com.simibubi.create.foundation.data.CreateRegistrate.create(BalancedFlight.MODID);
+    private static final CreateRegistrate CREATE_REGISTRATE = com.simibubi.create.foundation.data.CreateRegistrate.create(BalancedFlight.MODID);
+    public static CreateRegistrate registrate() {
+        return CREATE_REGISTRATE;
+    }
 
-    public static com.simibubi.create.foundation.data.CreateRegistrate registrate() {
-        return CREATE_REGISTRATE;
-    }
-    public static com.simibubi.create.foundation.data.CreateRegistrate createRegistrate() {
-        return CREATE_REGISTRATE;
-    }
+    public static final CreativeModeTab CREATIVE_TAB = new CreativeModeTab(BalancedFlight.MODID) {
+        public @NotNull ItemStack makeIcon() {
+            return new ItemStack(AllBlocks.FLIGHT_ANCHOR.get());
+        }
+    };
 
     public BalancedFlight() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         //REGISTRATE.registerEventListeners(modEventBus);
         CREATE_REGISTRATE.registerEventListeners(modEventBus);
 
-        Config.init();
+        BalancedFlightConfig.init();
         MinecraftForge.EVENT_BUS.register(this);
 
         AllBlocks.init();
@@ -49,9 +55,14 @@ public class BalancedFlight {
 
     public static void gatherData(GatherDataEvent event) {
         CREATE_REGISTRATE.addDataGenerator(ProviderType.LANG, prov -> {
-            prov.add(ModItemTab.tab, "Balanced Flight");
+            prov.add(CREATIVE_TAB, "Create: Balanced Flight");
             prov.add("curios.identifier.flight_ring", "Flight Ring");
         });
+
+        DataGenerator gen = event.getGenerator();
+        if (event.includeServer()) {
+            gen.addProvider(true, new BalancedFlightRecipeGen(gen));
+        }
     }
 
     static {

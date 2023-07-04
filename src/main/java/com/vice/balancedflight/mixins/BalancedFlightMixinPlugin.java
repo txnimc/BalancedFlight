@@ -1,7 +1,7 @@
 package com.vice.balancedflight.mixins;
 
 import com.vice.balancedflight.BalancedFlight;
-import com.vice.balancedflight.foundation.config.Config;
+import com.vice.balancedflight.foundation.config.BalancedFlightConfig;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -16,7 +16,7 @@ public class BalancedFlightMixinPlugin implements IMixinConfigPlugin
 
     @Override
     public void onLoad(String mixinPackage) {
-       Config.init();
+       BalancedFlightConfig.init();
     }
 
     @Override
@@ -33,7 +33,7 @@ public class BalancedFlightMixinPlugin implements IMixinConfigPlugin
             return false;
         }
 
-        if (!Config.ConfigSpec.isLoaded())
+        if (!BalancedFlightConfig.ConfigSpec.isLoaded())
         {
             BalancedFlight.LOGGER.error("Trying to use mixin plugin without config loaded");
         }
@@ -41,11 +41,11 @@ public class BalancedFlightMixinPlugin implements IMixinConfigPlugin
         String mixin = mixinClassName.substring(MIXIN_PACKAGE_ROOT.length());
 
         if (mixin.equals("ElytraMixin") || mixin.equals("ElytraServerMixin")|| mixin.equals("ElytraUpdateMixin")) {
-            return Config.ElytraBasic.get() || Config.ElytraAscended.get();
+            return BalancedFlightConfig.ElytraAnchor.get() || BalancedFlightConfig.ElytraAscended.get();
         }
 
         if (mixin.equals("ElytraRocketShiftKeyMixin")) {
-            return Config.infiniteRockets.get();
+            return BalancedFlightConfig.infiniteRockets.get();
         }
 
         return true;
