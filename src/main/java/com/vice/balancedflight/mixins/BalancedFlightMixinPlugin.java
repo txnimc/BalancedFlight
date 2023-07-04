@@ -1,7 +1,7 @@
 package com.vice.balancedflight.mixins;
 
 import com.vice.balancedflight.BalancedFlight;
-import com.vice.balancedflight.config.Config;
+import com.vice.balancedflight.foundation.config.Config;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;

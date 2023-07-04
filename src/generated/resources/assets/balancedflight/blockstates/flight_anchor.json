@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "balancedflight:block/flight_anchor"
+    }
+  }
+}

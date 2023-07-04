@@ -1,6 +1,7 @@
 package com.vice.balancedflight.mixins;
 
-import com.vice.balancedflight.blocks.compat.CuriosCompat;
+import com.vice.balancedflight.content.flightAnchor.FlightController;
+import com.vice.balancedflight.foundation.compat.AscendedRingCurio;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.effect.MobEffects;
@@ -24,7 +25,7 @@ public class ElytraServerMixin
     {
         if (!player.isFallFlying() && !player.isInWater() && !player.hasEffect(MobEffects.LEVITATION))
         {
-            CuriosCompat.FlightMode allowed = CuriosCompat.AllowedFlightModes(player, true);
+            FlightController.FlightMode allowed = FlightController.AllowedFlightModes(player, true);
             if (!allowed.canElytraFly())
                 return;
 

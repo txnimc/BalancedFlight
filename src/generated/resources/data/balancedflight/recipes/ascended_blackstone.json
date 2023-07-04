@@ -1,21 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "XSX",
-    "SVS",
-    "XSX"
-  ],
   "key": {
-    "S": {
-      "item": "minecraft:gold_block"
-    },
-    "X": {
+    "E": {
       "item": "minecraft:polished_blackstone"
     },
-    "V": {
+    "T": {
       "item": "minecraft:diamond"
+    },
+    "W": {
+      "item": "minecraft:gold_block"
     }
   },
+  "pattern": [
+    "EWE",
+    "WTW",
+    "EWE"
+  ],
   "result": {
     "item": "balancedflight:ascended_blackstone"
   }

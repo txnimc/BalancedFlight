@@ -1,6 +1,7 @@
 package com.vice.balancedflight.mixins;
 
-import com.vice.balancedflight.blocks.compat.CuriosCompat;
+import com.vice.balancedflight.content.flightAnchor.FlightController;
+import com.vice.balancedflight.foundation.compat.AscendedRingCurio;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -24,7 +25,7 @@ public class ElytraUpdateMixin
         if (!(player instanceof ServerPlayer))
             return;
 
-        CuriosCompat.FlightMode allowed = CuriosCompat.AllowedFlightModes((Player) player, true);
+        FlightController.FlightMode allowed = FlightController.AllowedFlightModes((Player) player, true);
         if (allowed.canElytraFly())
             ci.cancel();
     }

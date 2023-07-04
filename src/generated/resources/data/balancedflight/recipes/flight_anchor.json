@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "minecraft:gold_block"
+    },
+    "M": {
+      "item": "minecraft:iron_block"
+    },
+    "N": {
+      "item": "minecraft:feather"
+    },
+    "W": {
+      "item": "minecraft:polished_blackstone_bricks"
+    }
+  },
+  "pattern": [
+    "WAW",
+    "MNM",
+    "WWW"
+  ],
+  "result": {
+    "item": "balancedflight:flight_anchor"
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "side": "balancedflight:block/gilded_flight_anchor_side",
-    "bottom": "balancedflight:block/gilded_flight_anchor_bottom",
-    "top": "balancedflight:block/gilded_flight_anchor_top"
-  }
-}

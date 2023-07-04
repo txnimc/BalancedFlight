@@ -1,21 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "NUN",
-    "UFU",
-    "NUN"
-  ],
   "key": {
-    "U": {
+    "A": {
       "item": "minecraft:netherite_ingot"
     },
-    "F": {
+    "N": {
       "item": "minecraft:nether_star"
     },
-    "N": {
+    "P": {
       "item": "balancedflight:ascended_blackstone"
     }
   },
+  "pattern": [
+    "PAP",
+    "ANA",
+    "PAP"
+  ],
   "result": {
     "item": "balancedflight:flight_core"
   }

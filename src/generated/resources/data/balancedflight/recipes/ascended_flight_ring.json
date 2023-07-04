@@ -1,21 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "KPK",
-    "PRP",
-    "KPK"
-  ],
   "key": {
-    "P": {
+    "A": {
       "item": "minecraft:gold_block"
     },
-    "R": {
-      "item": "minecraft:elytra"
-    },
-    "K": {
+    "F": {
       "item": "balancedflight:flight_core"
+    },
+    "Y": {
+      "item": "minecraft:elytra"
     }
   },
+  "pattern": [
+    "FAF",
+    "AYA",
+    "FAF"
+  ],
   "result": {
     "item": "balancedflight:ascended_flight_ring"
   }
