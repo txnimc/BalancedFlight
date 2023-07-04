@@ -5,10 +5,12 @@
   "refmap": "balancedflight.refmap.json",
   "plugin": "com.vice.balancedflight.mixins.BalancedFlightMixinPlugin",
   "mixins": [
-    "ElytraMixin",
-    "ElytraRocketShiftKeyMixin",
     "ElytraServerMixin",
     "ElytraUpdateMixin"
+  ],
+  "client": [
+    "ElytraRocketShiftKeyMixin",
+    "ElytraMixin"
   ],
   "minVersion": "0.8"
 }

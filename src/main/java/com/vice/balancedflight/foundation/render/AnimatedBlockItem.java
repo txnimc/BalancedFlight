@@ -24,9 +24,9 @@ public class AnimatedBlockItem<I extends Item & IAnimatable> extends AssemblyOpe
     private static final String CONTROLLER_NAME = "popupController";
     public AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final int ANIM_OPEN = 0;
-    private Supplier<? extends GeoItemRenderer<?>> renderer;
+    private Supplier<Supplier<? extends GeoItemRenderer<?>>> renderer;
 
-    public AnimatedBlockItem(Block pBlock, Properties properties, Supplier<? extends GeoItemRenderer<?>> renderer) {
+    public AnimatedBlockItem(Block pBlock, Properties properties, Supplier<Supplier<? extends GeoItemRenderer<?>>> renderer) {
         super(pBlock, properties.tab(BalancedFlight.CREATIVE_TAB));
         this.renderer = renderer;
     }
@@ -52,7 +52,7 @@ public class AnimatedBlockItem<I extends Item & IAnimatable> extends AssemblyOpe
         super.initializeClient(consumer);
         consumer.accept(new IClientItemExtensions() {
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return renderer.get();
+                return renderer.get().get();
             }
         });
     }

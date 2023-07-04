@@ -55,7 +55,8 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
     @Override
     public void initialize()
     {
-        ((FlightAnchorEntity)blockEntity).placedRenderTime = AnimationTickHolder.getRenderTime(getWorld());
+        if (getWorld().isClientSide)
+            ((FlightAnchorEntity)blockEntity).placedRenderTime = AnimationTickHolder.getRenderTime(getWorld());
     }
 
     @Override

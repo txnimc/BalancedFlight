@@ -16,7 +16,7 @@ import java.util.List;
 
 public class FlightAnchorItem extends AnimatedBlockItem<FlightAnchorItem>
 {
-    public FlightAnchorItem(Block block, Properties props) { super(block, props, AllGeckoRenderers.FlightAnchorGeckoRenderer.ItemRenderer); }
+    public FlightAnchorItem(Block block, Properties props) { super(block, props, () -> AllGeckoRenderers.FlightAnchorGeckoRenderer.ItemRenderer); }
 
     @OnlyIn(Dist.CLIENT)
     @Override
