@@ -7,7 +7,7 @@ import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.simibubi.create.foundation.data.recipe.*;
 import com.vice.balancedflight.AllBlocks;
 import com.vice.balancedflight.AllItems;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -22,7 +22,7 @@ public class BalancedFlightRecipeGen extends CreateRecipeProvider {
     GeneratedRecipe ASCENDED_FLIGHT_RING;
     GeneratedRecipe FLIGHT_ANCHOR;
 
-    public BalancedFlightRecipeGen(DataGenerator dataGenerator) {
+    public BalancedFlightRecipeGen(PackOutput dataGenerator) {
         super(dataGenerator);
 
         ASCENDED_FLIGHT_RING = mechanicalCrafting(AllItems.ASCENDED_FLIGHT_RING::get, 1, "", (b) -> b
@@ -52,6 +52,7 @@ public class BalancedFlightRecipeGen extends CreateRecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, (rb) -> rb.require(Items.FEATHER)));
     }
 
+    @Override
     public @NotNull String getName() {
         return "Balanced Flights's Crafting Recipes";
     }

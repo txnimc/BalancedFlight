@@ -36,20 +36,13 @@ description="This mod adds an Angel Ring, which allows you to fly, like in a cre
 [[dependencies.balancedflight]]
     modId="forge"
     mandatory=true
-    versionRange="[39,)"
+    versionRange="[47.0.0,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.balancedflight]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.1,)"
+    versionRange="[1.20,1.21)"
     ordering="NONE"
     side="BOTH"
-
-[[dependencies.balancedflight]]
-   modId="curios"
-   mandatory=true
-   versionRange="[1.18.1-5.0.4.2,)"
-   ordering="AFTER"
-   side="BOTH"

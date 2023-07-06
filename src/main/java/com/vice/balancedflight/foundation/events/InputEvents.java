@@ -21,7 +21,7 @@ public class InputEvents {
             assert Minecraft.getInstance().player != null;
             LocalPlayer player = Minecraft.getInstance().player;
 
-            if (player.isOnGround() && !player.isFallFlying()) {
+            if (player.onGround() && !player.isFallFlying()) {
 
                 if (!FlightController.AllowedFlightModes(player, true).canElytraFly())
                     return;

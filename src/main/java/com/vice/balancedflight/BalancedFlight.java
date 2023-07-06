@@ -1,5 +1,6 @@
 package com.vice.balancedflight;
 
+import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
@@ -8,7 +9,9 @@ import com.simibubi.create.foundation.item.TooltipModifier;
 import com.tterrag.registrate.providers.ProviderType;
 import com.vice.balancedflight.foundation.config.BalancedFlightConfig;
 import com.vice.balancedflight.foundation.data.recipe.BalancedFlightRecipeGen;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -17,6 +20,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -31,11 +35,7 @@ public class BalancedFlight {
         return CREATE_REGISTRATE;
     }
 
-    public static final CreativeModeTab CREATIVE_TAB = new CreativeModeTab(BalancedFlight.MODID) {
-        public @NotNull ItemStack makeIcon() {
-            return new ItemStack(AllBlocks.FLIGHT_ANCHOR.get());
-        }
-    };
+
 
     public BalancedFlight() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -55,13 +55,14 @@ public class BalancedFlight {
 
     public static void gatherData(GatherDataEvent event) {
         CREATE_REGISTRATE.addDataGenerator(ProviderType.LANG, prov -> {
-            prov.add(CREATIVE_TAB, "Create: Balanced Flight");
+            prov.add(AllCreativeTabs.CREATIVE_TAB.get(), "Create: Balanced Flight");
             prov.add("curios.identifier.flight_ring", "Flight Ring");
         });
 
         DataGenerator gen = event.getGenerator();
+        PackOutput output = gen.getPackOutput();
         if (event.includeServer()) {
-            gen.addProvider(true, new BalancedFlightRecipeGen(gen));
+            gen.addProvider(true, new BalancedFlightRecipeGen(output));
         }
     }
 

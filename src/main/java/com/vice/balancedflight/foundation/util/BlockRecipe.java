@@ -3,6 +3,7 @@ package com.vice.balancedflight.foundation.util;
 
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.level.ItemLike;
@@ -23,7 +24,7 @@ public class BlockRecipe
     public void MadeFrom(ItemLike IngotItem)
     {
         // block recipe
-        ShapedRecipeBuilder.shaped(BlockItem)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BlockItem)
                 .pattern("xxx")
                 .pattern("xxx")
                 .pattern("xxx")
@@ -32,7 +33,7 @@ public class BlockRecipe
                 .save(consumer);
 
         // ingot recipe
-        ShapelessRecipeBuilder.shapeless(IngotItem, 9)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, IngotItem, 9)
                 .requires(BlockItem, 1)
                 .unlockedBy(IngotItem.toString(), InventoryChangeTrigger.TriggerInstance.hasItems(BlockItem))
                 .save(consumer);

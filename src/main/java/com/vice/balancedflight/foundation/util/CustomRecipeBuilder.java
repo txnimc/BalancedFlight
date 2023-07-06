@@ -2,6 +2,7 @@ package com.vice.balancedflight.foundation.util;
 
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.level.ItemLike;
 
@@ -92,7 +93,7 @@ public class CustomRecipeBuilder
 
     public void Save()
     {
-        ShapedRecipeBuilder builder = ShapedRecipeBuilder.shaped(BlockItem);
+        ShapedRecipeBuilder builder = ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BlockItem);
 
         for (List<ItemLike> row : Rows)
         {

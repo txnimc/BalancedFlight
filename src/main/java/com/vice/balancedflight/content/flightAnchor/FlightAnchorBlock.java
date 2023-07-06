@@ -6,6 +6,7 @@ import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.foundation.block.IBE;
+import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.vice.balancedflight.BalancedFlight;
 import com.vice.balancedflight.foundation.RegistrateExtensions;
@@ -22,7 +23,8 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,16 +33,16 @@ import org.jetbrains.annotations.NotNull;
 public class FlightAnchorBlock extends HorizontalKineticBlock implements IBE<FlightAnchorEntity>, BeaconBeamBlock, IRotate
 {
 
-    public static final RegistryEntry<? extends Block> REGISTRY_ENTRY = BalancedFlight.registrate()
+    public static final BlockEntry<? extends Block> REGISTRY_ENTRY = BalancedFlight.registrate()
             .object("flight_anchor")
             .block(FlightAnchorBlock::new)
             .transform(BlockStressDefaults.setImpact(64.0D))
-            .properties(properties -> BlockBehaviour.Properties.of(Material.HEAVY_METAL).strength(100).sound(SoundType.NETHERITE_BLOCK).noOcclusion())
+            .properties(properties -> BlockBehaviour.Properties.of().mapColor(MapColor.METAL).pushReaction(PushReaction.BLOCK).strength(100).sound(SoundType.NETHERITE_BLOCK).noOcclusion())
             .defaultLoot()
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_IRON_TOOL)
             .geckoItem(FlightAnchorItem::new)
-            .initialProperties(() -> new Item.Properties().stacksTo(1).tab(BalancedFlight.CREATIVE_TAB))
+            .initialProperties(() -> new Item.Properties().stacksTo(1))
             .build()
             .register();
 

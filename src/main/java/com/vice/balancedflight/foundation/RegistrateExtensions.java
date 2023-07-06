@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -90,34 +91,34 @@ public class RegistrateExtensions
 
                     .transforms()
 
-                    .transform(ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND)
+                    .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)
                     .rotation(75, 45, 0)
                     .scale(0.375f, 0.375f, 0.375f)
                     .translation(0, 2.5f, 0)
                     .end()
-                    .transform(ItemTransforms.TransformType.THIRD_PERSON_LEFT_HAND)
+                    .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND)
                     .rotation(75, 45, 0)
                     .scale(0.375f, 0.375f, 0.375f)
                     .translation(0, 2.5f, 0)
                     .end()
-                    .transform(ItemTransforms.TransformType.FIRST_PERSON_LEFT_HAND)
+                    .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND)
                     .rotation(0, 225, 0)
                     .scale(0.4f, 0.4f, 0.4f)
                     .end()
-                    .transform(ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND)
+                    .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
                     .rotation(0, 115, 0)
                     .scale(0.4f, 0.4f, 0.4f)
                     .end()
-                    .transform(ItemTransforms.TransformType.GROUND)
+                    .transform(ItemDisplayContext.GROUND)
                     .translation(0, 3, 0)
                     .scale(0.25f, 0.25f, 0.25f)
                     .end()
-                    .transform(ItemTransforms.TransformType.GUI)
+                    .transform(ItemDisplayContext.GUI)
                     .rotation(30, 137, 0)
                     .translation(0, -3.75f, 0)
                     .scale(0.625f, 0.625f, 0.625f)
                     .end()
-                    .transform(ItemTransforms.TransformType.FIXED)
+                    .transform(ItemDisplayContext.FIXED)
                     .translation(0, -1.5f, 0)
                     .scale(0.5f, 0.5f, 0.5f)
                     .end()

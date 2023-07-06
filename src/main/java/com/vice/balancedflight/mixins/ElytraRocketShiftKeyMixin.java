@@ -31,7 +31,7 @@ public class ElytraRocketShiftKeyMixin
 
             if (player.isSprinting() && player.input.hasForwardImpulse())
             {
-                Level world = player.level;
+                Level world = player.level();
 
                 long now = Instant.now().getEpochSecond();
                 if (now - LastUsedFireworkTime > 1)

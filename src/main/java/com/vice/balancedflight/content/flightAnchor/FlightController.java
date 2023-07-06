@@ -96,7 +96,7 @@ public class FlightController
 
     private static boolean IsWithinFlightRange(Player player)
     {
-        if (player.level.dimension() != Level.OVERWORLD)
+        if (player.level().dimension() != Level.OVERWORLD)
             return false;
 
         double anchorDistanceMultiplier = BalancedFlightConfig.anchorDistanceMultiplier.get();
