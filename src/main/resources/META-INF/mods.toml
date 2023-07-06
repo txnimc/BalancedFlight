@@ -46,3 +46,24 @@ description="This mod adds an Angel Ring, which allows you to fly, like in a cre
     versionRange="[1.20,1.21)"
     ordering="NONE"
     side="BOTH"
+
+[[dependencies.balancedflight]]
+    modId="curios"
+    mandatory=true
+    versionRange="[1.20.1-5.2.0-beta.3,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.balancedflight]]
+    modId="create"
+    mandatory=true
+    versionRange="[0.5.1.c,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.balancedflight]]
+    modId="geckolib"
+    mandatory=true
+    versionRange="[4.2,)"
+    ordering="AFTER"
+    side="BOTH"
