@@ -1,5 +1,6 @@
 package com.vice.balancedflight;
 
+import com.simibubi.create.AllCreativeModeTabs;
 import com.simibubi.create.Create;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
@@ -49,6 +50,7 @@ public class BalancedFlight {
         AllBlockEntities.init();
         AllItems.init();
         AllLangMessages.init();
+        AllCreativeTabs.register(modEventBus);
 
         modEventBus.addListener(EventPriority.LOWEST, BalancedFlight::gatherData);
     }

@@ -1,7 +1,7 @@
-// 1.20.1	2023-07-05T21:28:08.7043103	Registrate Provider for balancedflight [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2023-07-07T21:35:22.1902232	Registrate Provider for balancedflight [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 a02991b88a4798278a91d7f0c49fabcaac0cc6f8 assets/balancedflight/blockstates/flight_anchor.json
-ade0ec53d1a0ca3748dffffabf3b108af70de270 assets/balancedflight/lang/en_ud.json
-e59ca3e7dde2e80fb24d74b27972e61877bd3420 assets/balancedflight/lang/en_us.json
+cd8c02ffa98d705b0f7b3d7d5dd6d797941430ca assets/balancedflight/lang/en_ud.json
+208aa9b6a266d87d4bae0bb9980cc31d16ce7153 assets/balancedflight/lang/en_us.json
 1d2f81614ad984795c354891a34a3320c150ec65 assets/balancedflight/models/block/flight_anchor.json
 e4755f4ed9a7eb52653c19f8ecc948f40d83ee41 assets/balancedflight/models/item/ascended_flight_ring.json
 c6659a55eedf7e1aa5107b03bc983838c8966f8b assets/balancedflight/models/item/flight_anchor.json
