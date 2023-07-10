@@ -6,6 +6,7 @@ import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.foundation.block.IBE;
+import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.vice.balancedflight.BalancedFlight;
 import com.vice.balancedflight.foundation.RegistrateExtensions;
@@ -30,11 +31,10 @@ import org.jetbrains.annotations.NotNull;
 @Mod.EventBusSubscriber(modid = BalancedFlight.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class FlightAnchorBlock extends HorizontalKineticBlock implements IBE<FlightAnchorEntity>, BeaconBeamBlock, IRotate
 {
-
-    public static final RegistryEntry<? extends Block> REGISTRY_ENTRY = BalancedFlight.registrate()
+    public static final BlockEntry<? extends Block> REGISTRY_ENTRY = BalancedFlight.registrate()
             .object("flight_anchor")
             .block(FlightAnchorBlock::new)
-            .transform(BlockStressDefaults.setImpact(64.0D))
+            .transform(BlockStressDefaults.setImpact(256.0D))
             .properties(properties -> BlockBehaviour.Properties.of(Material.METAL).strength(10).sound(SoundType.NETHERITE_BLOCK).noOcclusion())
             .defaultLoot()
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)

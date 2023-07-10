@@ -40,6 +40,9 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
 
     public void setActive(boolean active)
     {
+        if (getWorld() instanceof PonderWorld)
+            return;
+
         if (!active)
         {
             FlightAnchorEntity.ActiveAnchors.remove(getPos());
@@ -95,7 +98,7 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
     }
 
     public static void beaconTick(Level level, BlockPos blockPos, FlightAnchorEntity entity) {
-        if (level instanceof PonderWorld ponderWorld) {
+        if (level instanceof PonderWorld) {
             if (entity.beamSections.size() > 0)
                 return;
 

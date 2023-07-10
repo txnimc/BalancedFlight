@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType;
@@ -56,10 +57,6 @@ public class FlightAnchorEntity extends KineticBlockEntity implements IAnimatabl
             .register();
 
 
-    public boolean shouldPlayAnimsWhileGamePaused() {
-        return true;
-    }
-
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> list)
     {
@@ -74,6 +71,7 @@ public class FlightAnchorEntity extends KineticBlockEntity implements IAnimatabl
     @Override
     public void registerControllers(AnimationData data) {
         controller = new AnimationController(this, "controller", 0, this::predicate);
+        data.shouldPlayWhilePaused = true;
         data.addAnimationController(controller);
     }
 
