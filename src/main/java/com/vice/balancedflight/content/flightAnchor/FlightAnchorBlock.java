@@ -35,7 +35,7 @@ public class FlightAnchorBlock extends HorizontalKineticBlock implements IBE<Fli
             .object("flight_anchor")
             .block(FlightAnchorBlock::new)
             .transform(BlockStressDefaults.setImpact(64.0D))
-            .properties(properties -> BlockBehaviour.Properties.of(Material.HEAVY_METAL).strength(100).sound(SoundType.NETHERITE_BLOCK).noOcclusion())
+            .properties(properties -> BlockBehaviour.Properties.of(Material.METAL).strength(10).sound(SoundType.NETHERITE_BLOCK).noOcclusion())
             .defaultLoot()
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_IRON_TOOL)

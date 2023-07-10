@@ -56,6 +56,10 @@ public class FlightAnchorEntity extends KineticBlockEntity implements IAnimatabl
             .register();
 
 
+    public boolean shouldPlayAnimsWhileGamePaused() {
+        return true;
+    }
+
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> list)
     {
