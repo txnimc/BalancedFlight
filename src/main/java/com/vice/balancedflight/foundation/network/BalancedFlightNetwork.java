@@ -27,7 +27,7 @@ public class BalancedFlightNetwork
         INSTANCE.messageBuilder(CustomNetworkMessage.class, nextID())
                 .encoder(CustomNetworkMessage::toBytes)
                 .decoder(CustomNetworkMessage::new)
-                .consumerNetworkThread(CustomNetworkMessage::handler)
+                .consumer(CustomNetworkMessage::handler)
                 .add();
     }
 }

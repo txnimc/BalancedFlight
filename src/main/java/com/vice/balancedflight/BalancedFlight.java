@@ -6,8 +6,6 @@ import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import com.simibubi.create.foundation.ponder.PonderLocalization;
-import com.simibubi.create.infrastructure.ponder.AllPonderTags;
-import com.simibubi.create.infrastructure.ponder.PonderIndex;
 import com.tterrag.registrate.providers.ProviderType;
 import com.vice.balancedflight.foundation.config.BalancedFlightConfig;
 import com.vice.balancedflight.foundation.data.recipe.BalancedFlightRecipeGen;
@@ -16,12 +14,12 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -69,7 +67,7 @@ public class BalancedFlight {
 
         DataGenerator gen = event.getGenerator();
         if (event.includeServer()) {
-            gen.addProvider(true, new BalancedFlightRecipeGen(gen));
+            gen.addProvider(new BalancedFlightRecipeGen(gen));
         }
 
         AllPonderScenes.register();

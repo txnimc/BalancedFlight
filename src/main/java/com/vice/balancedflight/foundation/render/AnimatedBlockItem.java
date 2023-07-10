@@ -6,7 +6,7 @@ import com.vice.balancedflight.BalancedFlight;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.client.IItemRenderProperties;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -48,10 +48,12 @@ public class AnimatedBlockItem<I extends Item & IAnimatable> extends AssemblyOpe
     }
 
     @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+    public void initializeClient(Consumer<IItemRenderProperties> consumer) {
         super.initializeClient(consumer);
-        consumer.accept(new IClientItemExtensions() {
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+
+        consumer.accept(new IItemRenderProperties() {
+            @Override
+            public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
                 return renderer.get().get();
             }
         });

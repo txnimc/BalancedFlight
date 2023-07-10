@@ -14,19 +14,19 @@ public class ConfiguredAnimatedGeoModel extends AnimatedGeoModel
     }
 
     @Override
-    public ResourceLocation getModelResource(Object object)
+    public ResourceLocation getModelLocation(Object object)
     {
         return new ResourceLocation(BalancedFlight.MODID, "geo/" + name + ".geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(Object object)
+    public ResourceLocation getTextureLocation(Object object)
     {
         return new ResourceLocation(BalancedFlight.MODID, "textures/block/" + name + ".png");
     }
 
     @Override
-    public ResourceLocation getAnimationResource(Object object)
+    public ResourceLocation getAnimationFileLocation(Object object)
     {
         return new ResourceLocation(BalancedFlight.MODID, "animations/" + name + ".animation.json");
     }

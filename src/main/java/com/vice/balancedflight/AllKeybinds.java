@@ -1,15 +1,14 @@
 package com.vice.balancedflight;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.vice.balancedflight.foundation.events.InputEvents;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.player.KeyboardInput;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.lwjgl.glfw.GLFW;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -23,7 +22,7 @@ public class AllKeybinds
             "key.category." + BalancedFlight.MODID);
 
     @SubscribeEvent
-    public static void onClientSetup(RegisterKeyMappingsEvent event) {
-        event.register(TAKE_OFF_KEY);
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> ClientRegistry.registerKeyBinding(TAKE_OFF_KEY));
     }
 }

@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 public class InputEvents {
 
     @SubscribeEvent
-    public static void onKeyboardInput(InputEvent.Key event) {
+    public static void onKeyboardInput(InputEvent.KeyInputEvent event) {
         if (AllKeybinds.TAKE_OFF_KEY.isDown() && BalancedFlightConfig.enableTakeOff.get()) {
             assert Minecraft.getInstance().player != null;
             LocalPlayer player = Minecraft.getInstance().player;

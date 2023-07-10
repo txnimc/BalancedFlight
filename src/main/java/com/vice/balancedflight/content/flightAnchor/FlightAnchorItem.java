@@ -4,6 +4,7 @@ import com.vice.balancedflight.foundation.render.AnimatedBlockItem;
 import com.vice.balancedflight.AllGeckoRenderers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -24,7 +25,7 @@ public class FlightAnchorItem extends AnimatedBlockItem<FlightAnchorItem>
     {
         super.appendHoverText(stack, world, tooltip, p_41424_);
 
-        tooltip.add(Component.literal("Allows flight around it based on how much RPM is powering it.").withStyle(ChatFormatting.WHITE));
-        tooltip.add(Component.literal("Only works in the overworld.").withStyle(ChatFormatting.RED));
+        tooltip.add(new TextComponent("Allows flight around it based on how much RPM is powering it.").withStyle(ChatFormatting.WHITE));
+        tooltip.add(new TextComponent("Only works in the overworld.").withStyle(ChatFormatting.RED));
     }
 }

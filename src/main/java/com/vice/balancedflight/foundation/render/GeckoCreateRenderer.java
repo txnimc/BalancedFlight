@@ -91,7 +91,7 @@ public class GeckoCreateRenderer<T extends KineticBlockEntity & IAnimatable> ext
     }
 
     public void renderGecko(T tile, float partialTicks, PoseStack stack, MultiBufferSource bufferIn, int packedLightIn) {
-        GeoModel model = modelProvider.getModel(modelProvider.getModelResource(tile));
+        GeoModel model = modelProvider.getModel(modelProvider.getModelLocation(tile));
         modelProvider.setCustomAnimations(tile, this.getInstanceId(tile));
         stack.pushPose();
         stack.translate(0, 0.01f, 0);
@@ -160,7 +160,7 @@ public class GeckoCreateRenderer<T extends KineticBlockEntity & IAnimatable> ext
 
     @Override
     public ResourceLocation getTextureLocation(T instance) {
-        return this.modelProvider.getTextureResource(instance);
+        return this.modelProvider.getTextureLocation(instance);
     }
 
 }
