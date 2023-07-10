@@ -40,6 +40,9 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
 
     public void setActive(boolean active)
     {
+        if (getWorld() instanceof PonderWorld)
+            return;
+        
         if (!active)
         {
             FlightAnchorEntity.ActiveAnchors.remove(getPos());
