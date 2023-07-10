@@ -2,11 +2,15 @@ package com.vice.balancedflight;
 
 import com.simibubi.create.AllCreativeModeTabs;
 import com.simibubi.create.Create;
+import com.simibubi.create.CreateClient;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.item.TooltipModifier;
+import com.simibubi.create.foundation.ponder.PonderLocalization;
+import com.simibubi.create.infrastructure.ponder.AllPonderTags;
+import com.simibubi.create.infrastructure.ponder.PonderIndex;
 import com.tterrag.registrate.providers.ProviderType;
 import com.vice.balancedflight.foundation.config.BalancedFlightConfig;
 import com.vice.balancedflight.foundation.data.recipe.BalancedFlightRecipeGen;
@@ -15,10 +19,12 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -36,11 +42,10 @@ public class BalancedFlight {
         return CREATE_REGISTRATE;
     }
 
-
-
     public BalancedFlight() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        //REGISTRATE.registerEventListeners(modEventBus);
+        IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+
         CREATE_REGISTRATE.registerEventListeners(modEventBus);
 
         BalancedFlightConfig.init();
@@ -53,6 +58,8 @@ public class BalancedFlight {
         AllCreativeTabs.register(modEventBus);
 
         modEventBus.addListener(EventPriority.LOWEST, BalancedFlight::gatherData);
+
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> BalancedFlightClient.onCtorClient(modEventBus, forgeEventBus));
     }
 
     public static void gatherData(GatherDataEvent event) {
@@ -66,6 +73,9 @@ public class BalancedFlight {
         if (event.includeServer()) {
             gen.addProvider(true, new BalancedFlightRecipeGen(output));
         }
+
+        AllPonderScenes.register();
+        PonderLocalization.provideRegistrateLang(CREATE_REGISTRATE);
     }
 
     static {

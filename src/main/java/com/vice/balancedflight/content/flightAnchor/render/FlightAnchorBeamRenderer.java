@@ -1,6 +1,7 @@
 package com.vice.balancedflight.content.flightAnchor.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.vice.balancedflight.content.flightAnchor.entity.FlightAnchorEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BeaconRenderer;
@@ -25,7 +26,7 @@ public class FlightAnchorBeamRenderer implements BlockEntityRenderer<FlightAncho
 
         for(int k = 0; k < list.size(); ++k) {
             BeaconBlockEntity.BeaconBeamSection beaconblockentity$beaconbeamsection = list.get(k);
-            BeaconRenderer.renderBeaconBeam(pPoseStack, pBufferSource, pPartialTick, i, j, k == list.size() - 1 ? 1024 : beaconblockentity$beaconbeamsection.getHeight(), beaconblockentity$beaconbeamsection.getColor());
+            BeaconRenderer.renderBeaconBeam(pPoseStack, pBufferSource, AnimationTickHolder.getPartialTicks(pBlockEntity.getLevel()), AnimationTickHolder.getTicks(pBlockEntity.getLevel()), j, k == list.size() - 1 ? 1024 : beaconblockentity$beaconbeamsection.getHeight(), beaconblockentity$beaconbeamsection.getColor());
             j += beaconblockentity$beaconbeamsection.getHeight();
         }
 

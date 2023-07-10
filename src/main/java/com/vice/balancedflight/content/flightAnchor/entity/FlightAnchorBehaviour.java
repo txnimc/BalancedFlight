@@ -4,12 +4,14 @@ import com.google.common.collect.Lists;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.ponder.PonderWorld;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -92,7 +94,15 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
 
     }
 
-    public void beaconTick(Level level, BlockPos blockPos, FlightAnchorEntity entity) {
+    public static void beaconTick(Level level, BlockPos blockPos, FlightAnchorEntity entity) {
+        if (level instanceof PonderWorld ponderWorld) {
+            if (entity.beamSections.size() > 0)
+                return;
+
+            entity.beamSections.add(new BeaconBlockEntity.BeaconBeamSection(DyeColor.WHITE.getTextureDiffuseColors()));
+            return;
+        }
+
         int i = blockPos.getX();
         int j = blockPos.getY();
         int k = blockPos.getZ();

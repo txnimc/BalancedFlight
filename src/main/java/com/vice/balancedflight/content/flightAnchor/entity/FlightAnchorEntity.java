@@ -49,6 +49,10 @@ public class FlightAnchorEntity extends KineticBlockEntity implements GeoBlockEn
             .register();
 
 
+    public boolean shouldPlayAnimsWhileGamePaused() {
+        return true;
+    }
+
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> list)
     {
