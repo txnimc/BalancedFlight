@@ -1,0 +1,14 @@
+{
+  "balancedflight.ponder.flight_anchor.header": "Vuelo potenciado por Fuerza Rotacional",
+  "balancedflight.ponder.flight_anchor.text_1": "El faro del vuelo necesita una enorme cantidad de poder para operar.",
+  "balancedflight.ponder.flight_anchor.text_2": "Por cada RPM, podras volar en un bloque de distancia del faro del vuelo",
+  "balancedflight.ponder.flight_anchor.text_3": "Altas velocidades cubren una mayor distancia.",
+  "balancedflight.ponder.tag.flight_anchor": "Faro del vuelo",
+  "balancedflight.ponder.tag.flight_anchor.description": "Vuelo potenciado por Fuerza Rotacional",
+  "block.balancedflight.flight_anchor": "Faro del vuelo",
+  "curios.identifier.flight_ring": "Anillo del vuelo",
+  "item.balancedflight.ascended_flight_ring": "Anillo del vuelo ascendente",
+  "itemGroup.balancedflight": "Create: Balanced Flight",
+  "tooltip.balancedflight.ascended_flight_ring": "Un anillo dorado muy denso, y aun asi, te permite volar donde sea",
+  "tooltip.balancedflight.flight_anchor": "Te permite volar en un radio de 25 bloques. Solo funciona en la superficie."
+}
