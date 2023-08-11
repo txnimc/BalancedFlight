@@ -1,0 +1,14 @@
+{
+  "balancedflight.ponder.flight_anchor.header": "应力驱动飞行",
+  "balancedflight.ponder.flight_anchor.text_1": "飞行锚需要在巨量的应力驱动下工作",
+  "balancedflight.ponder.flight_anchor.text_2": "每点RPM都能为飞行锚延伸一格远的作用距离",
+  "balancedflight.ponder.flight_anchor.text_3": "转速越高，锚的覆盖范围就越远",
+  "balancedflight.ponder.tag.flight_anchor": "飞行锚",
+  "balancedflight.ponder.tag.flight_anchor.description": "应力驱动飞行",
+  "block.balancedflight.flight_anchor": "飞行锚",
+  "curios.identifier.flight_ring": "飞翔指环",
+  "item.balancedflight.ascended_flight_ring": "高阶飞翔指环",
+  "itemGroup.balancedflight": "机械动力：飞行平衡",
+  "tooltip.balancedflight.ascended_flight_ring": "一枚密度很大的金戒指，却难以置信地允许佩戴者在任意地点飞行",
+  "tooltip.balancedflight.flight_anchor": "允许25格范围内飞行，只在主世界起效"
+}
