@@ -1,0 +1,14 @@
+{
+  "balancedflight.ponder.flight_anchor.header": "동력으로 비행하기",
+  "balancedflight.ponder.flight_anchor.text_1": "비행 정박기를 작동하려면 엄청난 양의 힘이 필요합니다.",
+  "balancedflight.ponder.flight_anchor.text_2": "각 RPM마다 앵커 주위를 한 블록씩 비행할 수 있습니다.",
+  "balancedflight.ponder.flight_anchor.text_3": "회전 속도가 빠를수록 훨씬 더 넓은 표면적을 커버할 수 있습니다.",
+  "balancedflight.ponder.tag.flight_anchor": "비행 정박기",
+  "balancedflight.ponder.tag.flight_anchor.description": "동력으로 작동하는 비행.",
+  "block.balancedflight.flight_anchor": "비행 정박기",
+  "curios.identifier.flight_ring": "비행 반지",
+  "item.balancedflight.ascended_flight_ring": "상승 비행 반지",
+  "itemGroup.balancedflight": "Create: Balanced Flight",
+  "tooltip.balancedflight.ascended_flight_ring": "믿기지 않을 정도로 촘촘한 금빛 반지로, 착용 시 어디에서든 비행할 수 있습니다.",
+  "tooltip.balancedflight.flight_anchor": "반경 25블록 안에서 비행할 수 있습니다. 오버월드에서만 작동합니다."
+}
