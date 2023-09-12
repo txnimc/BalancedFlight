@@ -23,7 +23,8 @@ public class FlightController
                 {
                     stopFlying(player);
                     // handle falling out of sky
-                    player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 200));
+                    if (BalancedFlightConfig.applySlowFalling.get())
+                        player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 200));
                 }
             }
             case Creative, Both -> {
@@ -31,7 +32,7 @@ public class FlightController
                 if (!player.getAbilities().mayfly) {
                     startFlying(player);
                     // handle removing effect cleanly
-                    if (player.hasEffect(MobEffects.SLOW_FALLING))
+                    if (player.hasEffect(MobEffects.SLOW_FALLING) && BalancedFlightConfig.applySlowFalling.get())
                         player.removeEffect(MobEffects.SLOW_FALLING);
                 }
             }
