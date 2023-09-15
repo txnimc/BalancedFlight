@@ -1,14 +1,14 @@
 {
-  "balancedflight.ponder.flight_anchor.header": "Vuelo potenciado por Fuerza Rotacional",
-  "balancedflight.ponder.flight_anchor.text_1": "El faro del vuelo necesita una enorme cantidad de poder para operar.",
-  "balancedflight.ponder.flight_anchor.text_2": "Por cada RPM, podras volar en un bloque de distancia del faro del vuelo",
-  "balancedflight.ponder.flight_anchor.text_3": "Altas velocidades cubren una mayor distancia.",
-  "balancedflight.ponder.tag.flight_anchor": "Faro del vuelo",
-  "balancedflight.ponder.tag.flight_anchor.description": "Vuelo potenciado por Fuerza Rotacional",
-  "block.balancedflight.flight_anchor": "Faro del vuelo",
-  "curios.identifier.flight_ring": "Anillo del vuelo",
-  "item.balancedflight.ascended_flight_ring": "Anillo del vuelo ascendente",
-  "itemGroup.balancedflight": "Create: Balanced Flight",
-  "tooltip.balancedflight.ascended_flight_ring": "Un anillo dorado muy denso, y aun asi, te permite volar donde sea",
-  "tooltip.balancedflight.flight_anchor": "Te permite volar en un radio de 25 bloques. Solo funciona en la superficie."
+  "balancedflight.ponder.flight_anchor.header": "Vuelo potenciado por Energia Cinetica",
+  "balancedflight.ponder.flight_anchor.text_1": "El Anclaje de Vuelo necesita una inmensa cantidad de poder para funcionar",
+  "balancedflight.ponder.flight_anchor.text_2": "Cada RPM sera cada bloque de distancia que podras volar alrededor del Anclaje",
+  "balancedflight.ponder.flight_anchor.text_3": "Altas velocidades cubren un gran area superficial",
+  "balancedflight.ponder.tag.flight_anchor": "Anclaje de Vuelo",
+  "balancedflight.ponder.tag.flight_anchor.description": "Vuelo potenciado por Energia Cinetica",
+  "block.balancedflight.flight_anchor": "Anclaje de Vuelo",
+  "curios.identifier.flight_ring": "Anillo de Vuelo",
+  "item.balancedflight.ascended_flight_ring": "Anillo de Vuelo Ascendente",
+  "itemGroup.balancedflight": "Create: Vuelo Balanceado",
+  "tooltip.balancedflight.ascended_flight_ring": "Un denso anillo de oro que a pesar del peso, te permite volar a cualquier lugar",
+  "tooltip.balancedflight.flight_anchor": "Te permite volar en un radio de 25 bloques. Solo funciona en la Superficie"
 }
