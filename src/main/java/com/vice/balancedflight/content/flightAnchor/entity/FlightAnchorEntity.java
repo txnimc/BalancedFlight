@@ -9,26 +9,20 @@ import com.vice.balancedflight.content.flightAnchor.FlightAnchorBlock;
 import com.vice.balancedflight.AllGeckoRenderers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.IAnimationTickable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.builder.ILoopType;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
+import software.bernie.geckolib.animatable.GeoBlockEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.util.GeckoLibUtil;
 import com.vice.balancedflight.content.flightAnchor.render.*;
+import software.bernie.geckolib.util.RenderUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FlightAnchorEntity extends KineticBlockEntity implements IAnimatable
+public class FlightAnchorEntity extends KineticBlockEntity implements GeoBlockEntity
 {
     public static Map<BlockPos, FlightAnchorEntity> ActiveAnchors = new HashMap<>();
 
@@ -38,10 +32,8 @@ public class FlightAnchorEntity extends KineticBlockEntity implements IAnimatabl
     boolean isActive;
     public float placedRenderTime;
 
-    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
-    public AnimationController controller = null;
-    private final AnimationBuilder onAnimation = new AnimationBuilder().addAnimation("animation.flight_anchor.deploy", ILoopType.EDefaultLoopTypes.PLAY_ONCE);
-    //private final AnimationBuilder offAnimation = new AnimationBuilder().addAnimation("animation.hex_extraction_unit.off", ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME);
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private static final RawAnimation ANIMATION = RawAnimation.begin().then("animation.flight_anchor.deploy", Animation.LoopType.PLAY_ONCE);
 
 
     public FlightAnchorEntity(BlockEntityType type, BlockPos pos, BlockState state)
@@ -57,27 +49,28 @@ public class FlightAnchorEntity extends KineticBlockEntity implements IAnimatabl
             .register();
 
 
+    public boolean shouldPlayAnimsWhileGamePaused() {
+        return true;
+    }
+
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> list)
     {
         list.add(new FlightAnchorBehaviour(this));
     }
 
-    private <E extends BlockEntity & IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        controller.setAnimation(onAnimation);
-        return PlayState.CONTINUE;
+
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, (state) -> state.setAndContinue(ANIMATION)));
+    }
+
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.cache;
     }
 
     @Override
-    public void registerControllers(AnimationData data) {
-        controller = new AnimationController(this, "controller", 0, this::predicate);
-        data.shouldPlayWhilePaused = true;
-        data.addAnimationController(controller);
-    }
-
-    @Override
-    public AnimationFactory getFactory() {
-        return factory;
+    public double getTick(Object entity) {
+        return RenderUtils.getCurrentTick();
     }
 
     public List<BeaconBlockEntity.BeaconBeamSection> getBeamSections() {

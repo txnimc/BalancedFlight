@@ -10,17 +10,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class FlightAnchorItem extends AnimatedBlockItem<FlightAnchorItem>
-{
+public class FlightAnchorItem extends AnimatedBlockItem {
     public FlightAnchorItem(Block block, Properties props) { super(block, props, () -> AllGeckoRenderers.FlightAnchorGeckoRenderer.ItemRenderer); }
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag p_41424_)
+    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level world, @NotNull List<Component> tooltip, @NotNull TooltipFlag p_41424_)
     {
         super.appendHoverText(stack, world, tooltip, p_41424_);
 

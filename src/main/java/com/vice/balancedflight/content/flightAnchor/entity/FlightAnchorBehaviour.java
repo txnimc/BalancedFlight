@@ -10,22 +10,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.phys.AABB;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class FlightAnchorBehaviour extends BlockEntityBehaviour
 {
-    public static final BehaviourType<FlightAnchorBehaviour> TYPE = new BehaviourType();
+    public static final BehaviourType<FlightAnchorBehaviour> TYPE = new BehaviourType<>();
 
     public FlightAnchorBehaviour(SmartBlockEntity be)
     {
@@ -42,7 +38,7 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
     {
         if (getWorld() instanceof PonderWorld)
             return;
-
+        
         if (!active)
         {
             FlightAnchorEntity.ActiveAnchors.remove(getPos());
@@ -90,11 +86,6 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
 
         if (flightAnchor.isActive)
             beaconTick(getWorld(), getPos(), flightAnchor);
-    }
-
-    @Override
-    public void lazyTick() {
-
     }
 
     public static void beaconTick(Level level, BlockPos blockPos, FlightAnchorEntity entity) {
@@ -167,15 +158,4 @@ public class FlightAnchorBehaviour extends BlockEntityBehaviour
         p_155104_.playSound(null, p_155105_, p_155106_, SoundSource.BLOCKS, 1.0F, 1.0F);
     }
 
-    private static void applyEffects(Level level, BlockPos blockPos, int radius) {
-        if (level.isClientSide)
-            return;
-
-        AABB aabb = (new AABB(blockPos)).inflate(radius * 10 + 10).expandTowards(0.0D, level.getHeight(), 0.0D);
-        List<Player> list = level.getEntitiesOfClass(Player.class, aabb);
-
-        for(Player player : list) {
-
-        }
-    }
 }

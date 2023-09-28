@@ -2,31 +2,32 @@ package com.vice.balancedflight.foundation.render;
 
 import com.vice.balancedflight.BalancedFlight;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.model.GeoModel;
 
-public class ConfiguredAnimatedGeoModel extends AnimatedGeoModel
+public class ConfiguredGeoModel extends GeoModel
 {
-    private String name;
+    private final String name;
 
-    public ConfiguredAnimatedGeoModel(String name) {
+    public ConfiguredGeoModel(String name) {
 
         this.name = name;
     }
 
     @Override
-    public ResourceLocation getModelResource(Object object)
+    public ResourceLocation getModelResource(GeoAnimatable object)
     {
         return new ResourceLocation(BalancedFlight.MODID, "geo/" + name + ".geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(Object object)
+    public ResourceLocation getTextureResource(GeoAnimatable object)
     {
         return new ResourceLocation(BalancedFlight.MODID, "textures/block/" + name + ".png");
     }
 
     @Override
-    public ResourceLocation getAnimationResource(Object object)
+    public ResourceLocation getAnimationResource(GeoAnimatable object)
     {
         return new ResourceLocation(BalancedFlight.MODID, "animations/" + name + ".animation.json");
     }

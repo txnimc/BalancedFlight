@@ -71,6 +71,6 @@ public class CustomNetworkMessage
             return;
 
         ItemStack itemstack = new ItemStack(Items.FIREWORK_ROCKET, 64);
-        player.level.addFreshEntity(new FireworkRocketEntity(player.level, itemstack, player));
+        player.level().addFreshEntity(new FireworkRocketEntity(player.level(), itemstack, player));
     }
 }

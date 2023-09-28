@@ -21,7 +21,7 @@ public class ElytraMixin
     private void tryToStartFallFlying(CallbackInfo ci) {
         LocalPlayer player = (LocalPlayer) (Object) this;
 
-        if (!player.isOnGround() && !player.isFallFlying() && !player.isInWater() && !player.hasEffect(MobEffects.LEVITATION))
+        if (!player.onGround() && !player.isFallFlying() && !player.isInWater() && !player.hasEffect(MobEffects.LEVITATION))
         {
             FlightController.FlightMode allowed = FlightController.AllowedFlightModes(player, true);
             if (!allowed.canElytraFly())

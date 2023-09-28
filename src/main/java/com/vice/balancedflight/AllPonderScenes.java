@@ -3,7 +3,6 @@ package com.vice.balancedflight;
 import com.simibubi.create.foundation.ponder.PonderRegistrationHelper;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
 import com.simibubi.create.foundation.ponder.PonderTag;
-import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import com.vice.balancedflight.content.flightAnchor.FlightAnchorPonderScene;
 import net.minecraft.resources.ResourceLocation;
 

@@ -21,14 +21,12 @@ public class InputEvents {
             assert Minecraft.getInstance().player != null;
             LocalPlayer player = Minecraft.getInstance().player;
 
-            if (player.isOnGround() && !player.isFallFlying()) {
+            if (player.onGround() && !player.isFallFlying()) {
 
                 if (!FlightController.AllowedFlightModes(player, true).canElytraFly())
                     return;
 
                 Vec3 vector3d = player.getLookAngle();
-                double d0 = 1.5D;
-                double d1 = 0.1D;
                 Vec3 vector3d1 = player.getDeltaMovement();
                 player.setDeltaMovement(vector3d1.add(
                         vector3d.x * 0.1D + (vector3d.x * 1.5D - vector3d1.x) * 1.5D,

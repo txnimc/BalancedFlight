@@ -10,5 +10,5 @@ import javax.annotation.Nullable;
 
 public interface ICreateSafeRenderer
 {
-    public void renderCreate(@Nullable KineticBlockEntity te, @Nullable BlockPos pos, BlockState blockState, PoseStack ms, MultiBufferSource buffer, int light);
+    void renderCreate(@Nullable KineticBlockEntity te, @Nullable BlockPos pos, BlockState blockState, PoseStack ms, MultiBufferSource buffer, int light);
 }

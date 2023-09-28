@@ -8,19 +8,21 @@ import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 public class FlightAnchorBeamRenderer implements BlockEntityRenderer<FlightAnchorEntity>
 {
 
     @Override
-    public void render(FlightAnchorEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay)
+    public void render(FlightAnchorEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, @NotNull MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay)
     {
         pPoseStack.pushPose();
         pPoseStack.translate(-0.5D, 0, -0.5D);
 
-        long i = pBlockEntity.getLevel().getGameTime();
+        Objects.requireNonNull(pBlockEntity.getLevel()).getGameTime();
         List<BeaconBlockEntity.BeaconBeamSection> list = pBlockEntity.getBeamSections();
         int j = 0;
 
@@ -34,7 +36,7 @@ public class FlightAnchorBeamRenderer implements BlockEntityRenderer<FlightAncho
         pPoseStack.popPose();
     }
 
-    public boolean shouldRenderOffScreen(FlightAnchorEntity pBlockEntity) {
+    public boolean shouldRenderOffScreen(@NotNull FlightAnchorEntity pBlockEntity) {
         return true;
     }
 

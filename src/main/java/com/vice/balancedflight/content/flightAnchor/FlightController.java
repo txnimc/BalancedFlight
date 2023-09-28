@@ -16,16 +16,20 @@ public class FlightController
     {
         FlightMode allowed = AllowedFlightModes(player, false);
 
-        switch (allowed)
-        {
+        switch (allowed) {
             case None, Elytra -> {
-                if (!player.isCreative() && player.getAbilities().mayfly)
-                {
+                // If the player is spectator or creative don't give slow falling, plus slow falling particles removed
+                if (!player.isCreative() && player.getAbilities().mayfly) {
                     stopFlying(player);
                     // handle falling out of sky
-                    player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 200));
+                    if (!player.isSpectator())
+                    {
+                        if (!player.hasEffect(MobEffects.SLOW_FALLING)) {
+                        player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 200, 0, false, false));
+                    }
                 }
             }
+        }
             case Creative, Both -> {
 
                 if (!player.getAbilities().mayfly) {
@@ -70,7 +74,7 @@ public class FlightController
             if (allowedModes != FlightMode.Elytra)
                 return allowedModes;
 
-            // if Elytra doesn't give unlimited creative flight,
+            // if Elytra don't give unlimited creative flight,
             // check if Basic tier is allowed to fly.
             if (!CanCreativeFly && BalancedFlightConfig.CreativeAnchor.get())
             {
@@ -96,7 +100,7 @@ public class FlightController
 
     private static boolean IsWithinFlightRange(Player player)
     {
-        if (player.level.dimension() != Level.OVERWORLD)
+        if (player.level().dimension() != Level.OVERWORLD)
             return false;
 
         double anchorDistanceMultiplier = BalancedFlightConfig.anchorDistanceMultiplier.get();
@@ -136,8 +140,5 @@ public class FlightController
             return this == Elytra || this == Both;
         }
 
-        public boolean canCreativeFly() {
-            return this == Creative || this == Both;
-        }
     }
 }

@@ -7,7 +7,7 @@ import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.simibubi.create.foundation.data.recipe.*;
 import com.vice.balancedflight.AllBlocks;
 import com.vice.balancedflight.AllItems;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -22,10 +22,10 @@ public class BalancedFlightRecipeGen extends CreateRecipeProvider {
     GeneratedRecipe ASCENDED_FLIGHT_RING;
     GeneratedRecipe FLIGHT_ANCHOR;
 
-    public BalancedFlightRecipeGen(DataGenerator dataGenerator) {
+    public BalancedFlightRecipeGen(PackOutput dataGenerator) {
         super(dataGenerator);
 
-        ASCENDED_FLIGHT_RING = mechanicalCrafting(AllItems.ASCENDED_FLIGHT_RING::get, 1, "", (b) -> b
+        ASCENDED_FLIGHT_RING = mechanicalCrafting(AllItems.ASCENDED_FLIGHT_RING::get, (b) -> b
                 .key('G', Ingredient.of(Blocks.GOLD_BLOCK))
                 .key('B', Ingredient.of(Blocks.NETHERITE_BLOCK))
                 .key('S', Ingredient.of(Items.NETHERITE_INGOT))
@@ -52,22 +52,21 @@ public class BalancedFlightRecipeGen extends CreateRecipeProvider {
                 .addStep(DeployerApplicationRecipe::new, (rb) -> rb.require(Items.FEATHER)));
     }
 
+    @Override
     public @NotNull String getName() {
         return "Balanced Flights's Crafting Recipes";
     }
 
-    GeneratedRecipe mechanicalCrafting(Supplier<ItemLike> result, int amount, String suffix, UnaryOperator<MechanicalCraftingRecipeBuilder> builder) {
+    GeneratedRecipe mechanicalCrafting(Supplier<ItemLike> result, UnaryOperator<MechanicalCraftingRecipeBuilder> builder) {
         return register(consumer -> {
-            MechanicalCraftingRecipeBuilder b = builder.apply(MechanicalCraftingRecipeBuilder.shapedRecipe(result.get(), amount));
-            ResourceLocation location = Create.asResource("mechanical_crafting/" + RegisteredObjects.getKeyOrThrow(result.get().asItem()).getPath() + suffix);
+            MechanicalCraftingRecipeBuilder b = builder.apply(MechanicalCraftingRecipeBuilder.shapedRecipe(result.get(), 1));
+            ResourceLocation location = Create.asResource("mechanical_crafting/" + RegisteredObjects.getKeyOrThrow(result.get().asItem()).getPath());
             b.build(consumer, location);
         });
     }
 
     protected GeneratedRecipe sequencedAssembly(ResourceLocation resource, UnaryOperator<SequencedAssemblyRecipeBuilder> transform) {
-        GeneratedRecipe generatedRecipe = (c) -> {
-            transform.apply(new SequencedAssemblyRecipeBuilder(resource)).build(c);
-        };
+        GeneratedRecipe generatedRecipe = (c) -> transform.apply(new SequencedAssemblyRecipeBuilder(resource)).build(c);
         this.all.add(generatedRecipe);
         return generatedRecipe;
     }

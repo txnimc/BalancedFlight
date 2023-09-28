@@ -6,7 +6,6 @@ import com.jozufozu.flywheel.api.Material;
 import com.jozufozu.flywheel.api.MaterialManager;
 import com.jozufozu.flywheel.api.instance.DynamicInstance;
 import com.jozufozu.flywheel.util.AnimationTickHolder;
-import com.mojang.math.Vector3f;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityInstance;
 import com.simibubi.create.content.kinetics.base.flwdata.RotatingData;
@@ -17,13 +16,14 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import org.joml.Vector3f;
 
 import java.util.EnumMap;
 import java.util.Map;
 
 public class FlightAnchorKineticInstance extends KineticBlockEntityInstance<FlightAnchorEntity> implements DynamicInstance
 {
-    protected final EnumMap<Direction, RotatingData> keys = new EnumMap(Direction.class);
+    protected final EnumMap<Direction, RotatingData> keys = new EnumMap<>(Direction.class);
     protected Direction sourceFacing;
 
     public FlightAnchorKineticInstance(MaterialManager materialManager, FlightAnchorEntity blockEntity) {
@@ -77,6 +77,7 @@ public class FlightAnchorKineticInstance extends KineticBlockEntityInstance<Flig
 
     protected void updateSourceFacing() {
         if (this.blockEntity.hasSource()) {
+            assert this.blockEntity.source != null;
             BlockPos source = this.blockEntity.source.subtract(this.pos);
             this.sourceFacing = Direction.getNearest((float)source.getX(), (float)source.getY(), (float)source.getZ());
         }
