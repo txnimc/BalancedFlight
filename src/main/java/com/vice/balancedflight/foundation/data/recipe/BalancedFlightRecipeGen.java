@@ -5,8 +5,7 @@ import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.simibubi.create.foundation.data.recipe.*;
-import com.vice.balancedflight.AllBlocks;
-import com.vice.balancedflight.AllItems;
+import com.vice.balancedflight.BalancedFlight;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -25,7 +24,7 @@ public class BalancedFlightRecipeGen extends CreateRecipeProvider {
     public BalancedFlightRecipeGen(PackOutput dataGenerator) {
         super(dataGenerator);
 
-        ASCENDED_FLIGHT_RING = mechanicalCrafting(AllItems.ASCENDED_FLIGHT_RING::get, 1, "", (b) -> b
+        ASCENDED_FLIGHT_RING = mechanicalCrafting(BalancedFlight.ASCENDED_FLIGHT_RING::get, 1, "", (b) -> b
                 .key('G', Ingredient.of(Blocks.GOLD_BLOCK))
                 .key('B', Ingredient.of(Blocks.NETHERITE_BLOCK))
                 .key('S', Ingredient.of(Items.NETHERITE_INGOT))
@@ -40,10 +39,10 @@ public class BalancedFlightRecipeGen extends CreateRecipeProvider {
                 .patternLine(" GGGGG ")
                 .disallowMirrored());
 
-        FLIGHT_ANCHOR = sequencedAssembly(AllBlocks.FLIGHT_ANCHOR.getId(), (b) -> b
+        FLIGHT_ANCHOR = sequencedAssembly(BalancedFlight.FLIGHT_ANCHOR_BLOCK.getId(), (b) -> b
                 .require(Blocks.BEACON)
                 .transitionTo(Blocks.BEACON)
-                .addOutput(AllBlocks.FLIGHT_ANCHOR.get(), 100.0F)
+                .addOutput(BalancedFlight.FLIGHT_ANCHOR_BLOCK.get(), 100.0F)
                 .loops(1)
                 .addStep(DeployerApplicationRecipe::new, (rb) -> rb.require(com.simibubi.create.AllItems.PRECISION_MECHANISM.get()))
                 .addStep(DeployerApplicationRecipe::new, (rb) -> rb.require(com.simibubi.create.AllBlocks.RAILWAY_CASING.get()))

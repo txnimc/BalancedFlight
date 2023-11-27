@@ -3,6 +3,7 @@ package com.vice.balancedflight.foundation.compat;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.vice.balancedflight.BalancedFlight;
 import com.vice.balancedflight.content.angelRing.FlightRing;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -46,7 +47,7 @@ public class AscendedRingCurio implements ICurio
         InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("flight_ring").build());
     }
 
-    public static boolean HasAscendedRing(Player player) { return CuriosApi.getCuriosHelper().findEquippedCurio(FlightRing.ASCENDED.get(), player).isPresent(); }
+    public static boolean HasAscendedRing(Player player) { return CuriosApi.getCuriosHelper().findEquippedCurio(BalancedFlight.ASCENDED_FLIGHT_RING.get(), player).isPresent(); }
 
 
     @Override public boolean canEquip(String identifier, LivingEntity entityLivingBase) { return !HasAscendedRing((Player) entityLivingBase);}

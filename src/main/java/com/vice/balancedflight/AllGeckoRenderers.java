@@ -12,7 +12,7 @@ public class AllGeckoRenderers
             new KineticGeckoRenderInfo<FlightAnchorEntity, FlightAnchorItem>(
                     new ConfiguredGeoModel("flight_anchor"),
                     new FlightAnchorSafeRenderer(),
-                    AllBlocks.FLIGHT_ANCHOR.get().defaultBlockState(),
+                    BalancedFlight.FLIGHT_ANCHOR_BLOCK.get().defaultBlockState(),
                     new FlightAnchorBeamRenderer());
 
 }

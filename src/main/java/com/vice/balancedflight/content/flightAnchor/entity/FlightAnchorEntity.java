@@ -41,13 +41,6 @@ public class FlightAnchorEntity extends KineticBlockEntity implements GeoBlockEn
         super(type, pos, state);
     }
 
-    public static final BlockEntityEntry<FlightAnchorEntity> REGISTRATION = BalancedFlight.registrate()
-            .blockEntity("flight_anchor", FlightAnchorEntity::new)
-            .instance(() -> FlightAnchorKineticInstance::new)
-            .validBlock(FlightAnchorBlock.REGISTRY_ENTRY)
-            .renderer(() -> AllGeckoRenderers.FlightAnchorGeckoRenderer.TileRenderer::apply)
-            .register();
-
 
     public boolean shouldPlayAnimsWhileGamePaused() {
         return true;

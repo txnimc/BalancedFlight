@@ -11,17 +11,17 @@ public class AllPonderScenes
     static final PonderRegistrationHelper HELPER = new PonderRegistrationHelper(BalancedFlight.MODID);
 
     public static final PonderTag FLIGHT_ANCHOR_TAG = create("flight_anchor")
-            .item(AllBlocks.FLIGHT_ANCHOR.get())
+            .item(BalancedFlight.FLIGHT_ANCHOR_BLOCK.get())
             .defaultLang("Flight Anchor", "Powered flight with Rotational Force")
             .addToIndex();
 
     public static void register() {
 
-        HELPER.forComponents(AllBlocks.FLIGHT_ANCHOR)
+        HELPER.forComponents(BalancedFlight.FLIGHT_ANCHOR_BLOCK)
                 .addStoryBoard("flight_anchor", FlightAnchorPonderScene::ponderScene, FLIGHT_ANCHOR_TAG);
 
         PonderRegistry.TAGS.forTag(FLIGHT_ANCHOR_TAG)
-                .add(AllBlocks.FLIGHT_ANCHOR);
+                .add(BalancedFlight.FLIGHT_ANCHOR_BLOCK);
     }
 
     private static PonderTag create(String id) {

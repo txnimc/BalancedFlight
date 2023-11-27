@@ -1,8 +1,5 @@
 package com.vice.balancedflight.content.angelRing;
 
-import com.tterrag.registrate.util.entry.ItemEntry;
-import com.tterrag.registrate.util.entry.RegistryEntry;
-import com.vice.balancedflight.AllCreativeTabs;
 import com.vice.balancedflight.BalancedFlight;
 import com.vice.balancedflight.foundation.compat.AscendedRingCurio;
 import com.vice.balancedflight.foundation.compat.ExternalMods;
@@ -27,11 +24,6 @@ import java.util.List;
 public class FlightRing extends Item {
 
     public FlightRing(Item.Properties props) { super(props); }
-
-    public static final ItemEntry<? extends Item> ASCENDED = BalancedFlight.registrate()
-            .item("ascended_flight_ring", FlightRing::new)
-            .initialProperties(() -> new Item.Properties().stacksTo(1))
-            .register();
 
     @SubscribeEvent
     public static void sendImc(InterModEnqueueEvent event) {
