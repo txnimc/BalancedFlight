@@ -13,6 +13,7 @@ public class BalancedFlightConfig
 {
     public static ForgeConfigSpec ConfigSpec;
 
+    public static ConfigValue<Boolean> applySlowFalling;
     public static ConfigValue<Boolean> enableElytraFlightFromGround;
     public static ConfigValue<Boolean> enableTakeOff;
     public static ConfigValue<Boolean> infiniteRockets;
@@ -43,6 +44,7 @@ public class BalancedFlightConfig
 
         builder.Block("Balancing Config", b -> {
             anchorDistanceMultiplier = b.defineInRange("Anchor Distance Multiplier (0d -> 10d, default 1d)", 1.0d, 0.0d, 10.0d);
+            applySlowFalling = b.define("Apply Slow Falling Effect When Removing Flight", true);
             disableFallDamageWhenWearingRing = b.define("Disable Fall Damage When Wearing Ascended Ring", true);
             disableFallDamageNearAnchor = b.define("Disable Fall Damage Near Flight Anchor", true);
         });
