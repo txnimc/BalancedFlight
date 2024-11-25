@@ -19,7 +19,7 @@ public class FlightController
         switch (allowed)
         {
             case None, Elytra -> {
-                if (!player.isCreative() && player.getAbilities().mayfly)
+                if (!player.isCreative() && player.getAbilities().mayfly && !player.isSpectator())
                 {
                     stopFlying(player);
                     // handle falling out of sky
